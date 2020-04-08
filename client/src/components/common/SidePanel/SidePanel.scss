@@ -1,0 +1,22 @@
+.side_panel {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  padding-top: var(--header-height);
+  box-sizing: border-box;
+
+  .side_panel-logo {
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--header-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .side_panel-nav {
+    height: 100%;
+    overflow: auto;
+  }
+}

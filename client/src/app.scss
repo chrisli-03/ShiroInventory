@@ -1,0 +1,19 @@
+:root {
+  --header-color: #ffc53d;
+  --side-panel-width: 200px;
+  --header-height: 60px;
+}
+
+html {
+  font-size: 16px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  height: 100%;
+}
