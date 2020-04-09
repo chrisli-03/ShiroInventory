@@ -1,14 +1,16 @@
 import React from 'react'
-import './BodyPanel.scss'
+import './MainPanel.scss'
 
 const Header = React.lazy(() => import(/* webpackChunkName: "components/common/Header" */ '~/components/common/Header/Header'))
+const Body = React.lazy(() => import(/* webpackChunkName: "components/common/Body" */ '~/components/common/Body/Body'))
 
-const BodyPanel = () => {
+const MainPanel = () => {
   return (
     <div className="body_panel">
       <Header />
+      <Body />
     </div>
   )
 }
 
-export default BodyPanel
+export default MainPanel

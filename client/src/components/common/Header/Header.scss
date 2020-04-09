@@ -1,4 +1,12 @@
 .header {
   background-color: var(--header-color);
   height: var(--header-height);
+  width: 100%;
+  border-bottom: 1px solid var(--primary-color);
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

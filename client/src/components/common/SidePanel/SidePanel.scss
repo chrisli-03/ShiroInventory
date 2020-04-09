@@ -9,14 +9,58 @@
   .side_panel-logo {
     height: var(--header-height);
     width: 100%;
+    line-height: var(--header-height);
     background-color: var(--header-color);
     position: absolute;
     top: 0;
     left: 0;
-  }
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--primary-color);
+    box-sizing: border-box;
+ }
 
   .side_panel-nav {
     height: 100%;
     overflow: auto;
+    box-sizing: border-box;
+    border-right: 1px solid #eee;
+  }
+
+  .ant-menu-submenu-selected,
+  .ant-menu-item:hover,
+  .ant-menu-item-active,
+  .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+  .ant-menu-submenu-active,
+  .ant-menu-submenu-title:hover,
+  .ant-menu-item > a:hover,
+  .ant-menu-item-selected > a,
+  .ant-menu-item-selected > a:hover {
+    color: var(--primary-color);
+  }
+
+  .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+  .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+  .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+  .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+  .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+  .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+  .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+  .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before {
+    background: linear-gradient(to right, var(--primary-color), var(--primary-color));
+  }
+
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #fff1b8;
+  }
+
+  .ant-menu-vertical .ant-menu-item::after,
+  .ant-menu-vertical-left .ant-menu-item::after,
+  .ant-menu-vertical-right .ant-menu-item::after,
+  .ant-menu-inline .ant-menu-item::after {
+    border-right: 3px solid var(--primary-color);
   }
 }
