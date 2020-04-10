@@ -1,5 +1,5 @@
 import React, { createRef, forwardRef, useState, useEffect } from 'react'
-import { Button, Pagination, Table } from 'antd'
+import { Pagination, Table } from 'antd'
 import './TableLayout.scss'
 
 const tableWrapper = createRef()
@@ -10,7 +10,7 @@ const TableWrapper = forwardRef((props, ref) => (
   </div>
 ))
 
-const TableLayout = ({ buttons, dataSource, columns, onChange, onShowSizeChange }) => {
+const TableLayout = ({ loading, buttons, size, dataSource, columns, onChange, onShowSizeChange }) => {
   const [tableHeight, setTableHeight] = useState(0)
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const TableLayout = ({ buttons, dataSource, columns, onChange, onShowSizeChange 
       </div>
       <TableWrapper ref={tableWrapper}>
         <Table
+          loading={loading}
           dataSource={dataSource}
           columns={columns}
           size="small"
@@ -42,7 +43,7 @@ const TableLayout = ({ buttons, dataSource, columns, onChange, onShowSizeChange 
       <Pagination
         className="table-layout-pagination"
         defaultCurrent={1}
-        total={dataSource.length}
+        total={size}
         onChange={onChange}
         onShowSizeChange={onShowSizeChange}
       />

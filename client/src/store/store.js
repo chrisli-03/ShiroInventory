@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import { testReducer } from './test/reducers'
+import { inventoryReducer } from './inventory/reducers'
 
 const rootReducer = combineReducers({
-  test: testReducer
+  inventory: inventoryReducer
 })
 
 export default function configureStore(preloadedState) {

@@ -1,61 +1,28 @@
-import React from 'react'
-import { Button, Pagination, Table } from 'antd'
-import TableLayout from '~/components/layouts/TableLayout/TableLayout'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Button } from 'antd'
+import { getInventorySize, getInventory } from '~/store/inventory/actions'
 import './Inventory.scss'
 
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  }
-]
+const TableLayout = React.lazy(() => import(/* webpackChunkName: "components/layouts/TableLayout" */ '~/components/layouts/TableLayout/TableLayout'))
 
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  })
-}
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-]
-
-const Inventory = () => {
-  const onChange = pageNumber => {
-    console.log(pageNumber)
+const Inventory = ({ loading, size, columns, dataSource, getInventorySize, getInventory }) => {
+  const onChange = (current, size) => {
+    getInventory(current, size)
   }
 
-  const onShowSizeChange = (current, size) => {
-    console.log(current, size)
-  }
+  useEffect(() => {
+    getInventorySize()
+  }, [getInventorySize])
+
+  useEffect(() => {
+    if (size > 1) getInventory(1, 10)
+  }, [size, getInventory])
 
   return (
     <TableLayout
+      loading={loading}
+      size={size}
       dataSource={dataSource}
       columns={columns}
       buttons={
@@ -65,9 +32,24 @@ const Inventory = () => {
         </React.Fragment>
       }
       onChange={onChange}
-      onShowSizeChange={onShowSizeChange}
+      onShowSizeChange={onChange}
     />
   )
 }
 
-export default Inventory
+const mapStateToProps = state => ({
+  loading: state.inventory.loading,
+  columns: state.inventory.columns,
+  dataSource: state.inventory.dataSource,
+  size: state.inventory.size
+})
+
+const mapDispatchToProps = dispatch => ({
+  getInventorySize: () => dispatch(getInventorySize()),
+  getInventory: (page, size) => dispatch(getInventory(page, size))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Inventory)

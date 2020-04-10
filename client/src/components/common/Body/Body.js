@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+import Spinner from '~/components/Spinner/Spinner'
 import './Body.scss'
 
 const Inventory = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory" */ '~/views/management/Inventory/Inventory'))
@@ -7,7 +8,7 @@ const Inventory = React.lazy(() => import(/* webpackChunkName: "views/management
 const Body = () => {
   return (
     <div className="body">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Switch>
           <Route path="/inventory">
             <Inventory />
