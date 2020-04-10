@@ -1,0 +1,25 @@
+.table-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+
+  .table-layout-buttons,
+  .table-layout-table {
+    margin-bottom: .75rem;
+  }
+
+  .table-layout-buttons, .ant-btn {
+    margin-right: .75rem;
+  }
+
+  .table-layout-table {
+    height: 0;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .table-layout-pagination {
+    text-align: right;
+  }
+}

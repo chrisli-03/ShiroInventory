@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Pagination, Table } from 'antd'
+import TableLayout from '~/components/layouts/TableLayout/TableLayout'
 import './Inventory.scss'
 
 const dataSource = [
@@ -16,6 +17,15 @@ const dataSource = [
     address: '10 Downing Street',
   }
 ]
+
+for (let i = 0; i < 100; i++) {
+  dataSource.push({
+    key: '2',
+    name: 'John',
+    age: 42,
+    address: '10 Downing Street',
+  })
+}
 
 const columns = [
   {
@@ -39,14 +49,24 @@ const Inventory = () => {
   const onChange = pageNumber => {
     console.log(pageNumber)
   }
+
+  const onShowSizeChange = (current, size) => {
+    console.log(current, size)
+  }
+
   return (
-    <div className="table-layout">
-      <div className="table-layout-buttons">
-        <Button type="primary">Primary</Button>
-      </div>
-      <Table dataSource={dataSource} columns={columns} size="small" scroll={{ y: 240 }} pagination={false} />
-      <Pagination showQuickJumper defaultCurrent={1} total={dataSource.length} onChange={onChange} />
-    </div>
+    <TableLayout
+      dataSource={dataSource}
+      columns={columns}
+      buttons={
+        <React.Fragment>
+          <Button type="primary">Primary</Button>
+          <Button type="default">Default</Button>
+        </React.Fragment>
+      }
+      onChange={onChange}
+      onShowSizeChange={onShowSizeChange}
+    />
   )
 }
 
