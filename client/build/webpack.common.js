@@ -70,6 +70,7 @@ module.exports = {
       template: 'public/index.html',
       title: 'Shiro Inventory',
       favicon: 'public/favicon.ico',
+      reset: 'public/reset.css',
       minify: {
         collapseWhitespace: true
       }

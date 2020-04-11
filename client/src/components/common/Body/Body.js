@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Spinner from '~/components/Spinner/Spinner'
 import './Body.scss'
 
+const Dashboard = React.lazy(() => import(/* webpackChunkName: "views/main/Dashboard" */ '~/views/main/Dashboard/Dashboard'))
 const Inventory = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory" */ '~/views/management/Inventory/Inventory'))
 
 const Body = () => {
@@ -10,6 +11,9 @@ const Body = () => {
     <div className="body">
       <Suspense fallback={<Spinner />}>
         <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
           <Route path="/inventory">
             <Inventory />
           </Route>

@@ -20,3 +20,28 @@ html, body {
 #app {
   height: 100%;
 }
+
+.auth_panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, .7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    max-width: 400px;
+    width: 100%;
+    padding: 1.25rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+    .form-header {
+      font-size: 1.25rem;
+    }
+  }
+}
