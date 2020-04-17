@@ -15,9 +15,9 @@ module.exports = merge(common, {
     hot: true,
     historyApiFallback: true,
     host: '0.0.0.0',
-    port: 8080,
+    port: 8081,
     open: true,
-    public: 'localhost:8080'
+    public: 'localhost:8081'
   },
   module: {
     rules: [
