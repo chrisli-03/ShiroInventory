@@ -2,11 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
 import { authReducer } from './auth/reducers'
-import { inventoryReducer } from './inventory/reducers'
+import { listReducer } from './list/reducers'
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  inventory: inventoryReducer
+  list: listReducer
 })
 
 export default function configureStore(preloadedState) {

@@ -25,7 +25,7 @@ const App = ({ user }) => {
   return (
     <Router>
       <Suspense fallback={<Spinner />}>
-        {LoginForm}
+        {/*{LoginForm}*/}
         <MainLayout />
       </Suspense>
     </Router>
