@@ -3,6 +3,7 @@ package com.shiros.inventory.entity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="tb_restock")
@@ -21,17 +22,17 @@ public class RestockForm {
     @Column(name="supplier")
     private String supplier;
 
+    @Column(name="creation_date")
+    private Date creationDate;
+
+    public RestockForm() {
+        this.creationDate = new Date();
+    }
+
     public RestockForm(String formID, String supplier) {
         this.formID = formID;
         this.supplier = supplier;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.creationDate = new Date();
     }
 
     public String getFormID() {
@@ -48,6 +49,14 @@ public class RestockForm {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public Long getCreationDate() {
+        return creationDate.getTime() / 1000;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
 }

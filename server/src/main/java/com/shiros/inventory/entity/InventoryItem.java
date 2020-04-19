@@ -17,33 +17,31 @@ public class InventoryItem implements Serializable {
     private Long id;
 
     @Column(name="item_name")
-    private String name;
+    private String itemName;
 
     @Column(name="item_code")
-    private String code;
+    private String itemCode;
 
-    public Long getId() {
-        return id;
+    public InventoryItem() {}
+
+    public InventoryItem(String itemName, String itemCode) {
+        this.itemName = itemName;
+        this.itemCode = itemCode;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getItemName() {
+        return itemName;
     }
 
-    public String getName() {
-        return name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getItemCode() {
+        return itemCode;
     }
 
-    public String getCode() {
-        return code;
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
     }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
 }

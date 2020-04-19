@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface InventoryItemRepository extends CrudRepository<InventoryItem, Long> {
 
-    @Query("select i from InventoryItem i where i.code in :itemCodes")
+    @Query("select i from InventoryItem i where i.itemCode in :itemCodes")
     List<InventoryItem> findByItemCodes(List<String> itemCodes);
 
 }

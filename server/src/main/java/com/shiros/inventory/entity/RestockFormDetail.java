@@ -15,69 +15,61 @@ public class RestockFormDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String itemName;
 
     @Column(name="item_code")
-    private String code;
+    private String itemCode;
 
     @Column(name="item_spec")
-    private String specification;
+    private String itemSpec;
 
     @Column(name="item_price")
-    private float price;
+    private float itemPrice;
 
     @Column(name="item_quantity")
-    private int quantity;
+    private int itemQuantity;
 
     @Column(name="restock_form_id")
     private String restockFormID;
 
-    public Long getId() {
-        return id;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public String getName() {
-        return name;
+    public String getItemCode() {
+        return itemCode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
     }
 
-    public String getCode() {
-        return code;
+    public String getItemSpec() {
+        return itemSpec;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setItemSpec(String itemSpec) {
+        this.itemSpec = itemSpec;
     }
 
-    public String getSpecification() {
-        return specification;
+    public float getItemPrice() {
+        return itemPrice;
     }
 
-    public void setSpecification(String specification) {
-        this.specification = specification;
+    public void setItemPrice(float itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
-    public float getPrice() {
-        return price;
+    public int getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
 
     public String getRestockFormID() {

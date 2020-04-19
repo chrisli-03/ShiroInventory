@@ -6,6 +6,7 @@ import com.shiros.inventory.entity.RestockFormDetail;
 import com.shiros.inventory.service.InventoryItemService;
 import com.shiros.inventory.service.RestockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,18 +59,17 @@ public class RestockController {
         this.inventoryItemService = inventoryItemService;
     }
 
+    @Transactional
     @RequestMapping(value = "/restock", method = RequestMethod.POST)
     public RestockForm createRestock(@RequestBody NewRestockEntity newRestockEntity) {
         RestockForm restockForm = newRestockEntity.getRestockForm();
         List<RestockFormDetail> restockFormDetails = newRestockEntity.getDetail();
-        List<String> itemCodes = restockFormDetails.stream().map(u -> u.getCode()).collect(Collectors.toList());
+        List<String> itemCodes = restockFormDetails.stream().map(u -> u.getItemCode()).collect(Collectors.toList());
         List<InventoryItem> inventoryItems = inventoryItemService.findByItemCodes(itemCodes);
-        Set<String> inventoryItemsSet = inventoryItems.stream().map(n -> n.getCode()).collect(Collectors.toSet());
+        Set<String> inventoryItemsSet = inventoryItems.stream().map(n -> n.getItemCode()).collect(Collectors.toSet());
         for (RestockFormDetail restockFormDetail : restockFormDetails) {
-            if (!inventoryItemsSet.contains(restockFormDetail.getCode())) {
-                InventoryItem inventoryItem = new InventoryItem();
-                inventoryItem.setName(restockFormDetail.getName());
-                inventoryItem.setCode(restockFormDetail.getCode());
+            if (!inventoryItemsSet.contains(restockFormDetail.getItemCode())) {
+                InventoryItem inventoryItem = new InventoryItem(restockFormDetail.getItemName(), restockFormDetail.getItemCode());
                 inventoryItemService.createInventoryItem(inventoryItem);
             }
             restockFormDetail.setRestockFormID(restockForm.getFormID());
