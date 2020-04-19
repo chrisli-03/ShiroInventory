@@ -18,8 +18,13 @@ public class InventoryItemServiceImpl implements InventoryItemService {
     }
 
     @Override
-    public List<InventoryItem> findAll() {
-        return (List<InventoryItem>) inventoryItemRepository.findAll();
+    public InventoryItem createInventoryItem(InventoryItem inventoryItem) {
+        return inventoryItemRepository.save(inventoryItem);
+    }
+
+    @Override
+    public List<InventoryItem> findByItemCodes(List<String> itemCodes) {
+        return inventoryItemRepository.findByItemCodes(itemCodes);
     }
 
 }

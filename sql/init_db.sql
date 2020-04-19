@@ -15,5 +15,6 @@ CREATE TABLE IF NOT EXISTS tb_restock_detail (
 	item_code VARCHAR(255) NOT NULL,
 	item_spec VARCHAR(255),
 	item_price FLOAT NOT NULL,
-	item_quantity INT NOT NULL
+	item_quantity INT NOT NULL,
+	restock_form_id VARCHAR(255) NOT NULL
 );

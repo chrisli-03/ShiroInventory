@@ -1,6 +1,7 @@
 package com.shiros.inventory.service;
 
 import com.shiros.inventory.entity.RestockForm;
+import com.shiros.inventory.entity.RestockFormDetail;
 import com.shiros.inventory.repository.RestockFormDetailRepository;
 import com.shiros.inventory.repository.RestockFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class RestockServiceImpl implements RestockService {
     @Override
     public RestockForm createRestockForm(RestockForm restockForm) {
         return restockFormRepository.save(restockForm);
+    }
+
+    @Override
+    public RestockFormDetail createRestockFormDetail(RestockFormDetail restockFormDetail) {
+        return restockFormDetailRepository.save(restockFormDetail);
     }
 
 }

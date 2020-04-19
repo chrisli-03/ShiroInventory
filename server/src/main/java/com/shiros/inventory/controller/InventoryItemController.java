@@ -19,9 +19,4 @@ public class InventoryItemController {
         this.inventoryItemService = inventoryItemService;
     }
 
-    @RequestMapping(value = "/inventory", method = RequestMethod.GET)
-    public List<InventoryItem> getAllInventoryItem() {
-        return inventoryItemService.findAll();
-    }
-
 }

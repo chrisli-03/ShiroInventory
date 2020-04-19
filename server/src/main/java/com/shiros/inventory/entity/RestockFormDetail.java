@@ -15,6 +15,8 @@ public class RestockFormDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @Column(name="item_code")
     private String code;
 
@@ -27,12 +29,23 @@ public class RestockFormDetail {
     @Column(name="item_quantity")
     private int quantity;
 
+    @Column(name="restock_form_id")
+    private String restockFormID;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCode() {
@@ -65,5 +78,13 @@ public class RestockFormDetail {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getRestockFormID() {
+        return restockFormID;
+    }
+
+    public void setRestockFormID(String restockFormID) {
+        this.restockFormID = restockFormID;
     }
 }

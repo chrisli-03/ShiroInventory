@@ -1,7 +1,9 @@
 package com.shiros.inventory.controller;
 
+import com.shiros.inventory.entity.InventoryItem;
 import com.shiros.inventory.entity.RestockForm;
 import com.shiros.inventory.entity.RestockFormDetail;
+import com.shiros.inventory.service.InventoryItemService;
 import com.shiros.inventory.service.RestockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 class NewRestockEntity {
 
@@ -42,15 +46,36 @@ class NewRestockEntity {
 public class RestockController {
 
     private RestockService restockService;
+    private InventoryItemService inventoryItemService;
 
     @Autowired
     public void setInjectedBean(RestockService restockService) {
         this.restockService = restockService;
     }
 
+    @Autowired
+    public void setInjectedBean(InventoryItemService inventoryItemService) {
+        this.inventoryItemService = inventoryItemService;
+    }
+
     @RequestMapping(value = "/restock", method = RequestMethod.POST)
     public RestockForm createRestock(@RequestBody NewRestockEntity newRestockEntity) {
-        return restockService.createRestockForm(newRestockEntity.getRestockForm());
+        RestockForm restockForm = newRestockEntity.getRestockForm();
+        List<RestockFormDetail> restockFormDetails = newRestockEntity.getDetail();
+        List<String> itemCodes = restockFormDetails.stream().map(u -> u.getCode()).collect(Collectors.toList());
+        List<InventoryItem> inventoryItems = inventoryItemService.findByItemCodes(itemCodes);
+        Set<String> inventoryItemsSet = inventoryItems.stream().map(n -> n.getCode()).collect(Collectors.toSet());
+        for (RestockFormDetail restockFormDetail : restockFormDetails) {
+            if (!inventoryItemsSet.contains(restockFormDetail.getCode())) {
+                InventoryItem inventoryItem = new InventoryItem();
+                inventoryItem.setName(restockFormDetail.getName());
+                inventoryItem.setCode(restockFormDetail.getCode());
+                inventoryItemService.createInventoryItem(inventoryItem);
+            }
+            restockFormDetail.setRestockFormID(restockForm.getFormID());
+            restockService.createRestockFormDetail(restockFormDetail);
+        }
+        return restockService.createRestockForm(restockForm);
     }
 
 }

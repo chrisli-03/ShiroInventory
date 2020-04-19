@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface InventoryItemService {
 
-    List<InventoryItem> findAll();
+    public InventoryItem createInventoryItem(InventoryItem inventoryItem);
+    public List<InventoryItem> findByItemCodes(List<String> itemCodes);
 
 }
