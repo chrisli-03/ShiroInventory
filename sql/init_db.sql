@@ -8,13 +8,24 @@ CREATE TABLE IF NOT EXISTS tb_inventory (
 CREATE TABLE IF NOT EXISTS tb_restock (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	form_id VARCHAR(255) NOT NULL,
-	supplier VARCHAR(255)
+	supplier VARCHAR(255),
+	creation_date DATETIME NOT NULL
 );
 CREATE TABLE IF NOT EXISTS tb_restock_detail (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	item_code VARCHAR(255) NOT NULL,
 	item_spec VARCHAR(255),
 	item_price FLOAT NOT NULL,
-	item_quantity INT NOT NULL,
-	restock_form_id VARCHAR(255) NOT NULL
+	item_quantity INT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS tb_warehouse (
+	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	warehouse_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS tb_supplier (
+	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	supplier_name VARCHAR(255) NOT NULL,
+	supplier_address VARCHAR(255),
+	supplier_contact VARCHAR(255),
+	supplier_contact_name VARCHAR(255)
 );

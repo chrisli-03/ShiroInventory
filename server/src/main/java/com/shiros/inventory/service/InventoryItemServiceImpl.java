@@ -1,6 +1,7 @@
 package com.shiros.inventory.service;
 
 import com.shiros.inventory.entity.InventoryItem;
+import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.repository.InventoryItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

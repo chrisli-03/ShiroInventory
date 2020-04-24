@@ -62,19 +62,26 @@ public class RestockController {
     @Transactional
     @RequestMapping(value = "/restock", method = RequestMethod.POST)
     public RestockForm createRestock(@RequestBody NewRestockEntity newRestockEntity) {
+        // required variables
         RestockForm restockForm = newRestockEntity.getRestockForm();
         List<RestockFormDetail> restockFormDetails = newRestockEntity.getDetail();
         List<String> itemCodes = restockFormDetails.stream().map(u -> u.getItemCode()).collect(Collectors.toList());
         List<InventoryItem> inventoryItems = inventoryItemService.findByItemCodes(itemCodes);
         Set<String> inventoryItemsSet = inventoryItems.stream().map(n -> n.getItemCode()).collect(Collectors.toSet());
+
+        // loop restock detail rows
         for (RestockFormDetail restockFormDetail : restockFormDetails) {
+            // if item is not an inventory item, add it to inventory item table
             if (!inventoryItemsSet.contains(restockFormDetail.getItemCode())) {
                 InventoryItem inventoryItem = new InventoryItem(restockFormDetail.getItemName(), restockFormDetail.getItemCode());
                 inventoryItemService.createInventoryItem(inventoryItem);
             }
+            // add row to restock form detail table
             restockFormDetail.setRestockFormID(restockForm.getFormID());
             restockService.createRestockFormDetail(restockFormDetail);
         }
+
+        // add restock form to restock form table
         return restockService.createRestockForm(restockForm);
     }
 
