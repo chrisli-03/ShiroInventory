@@ -21,20 +21,19 @@ public class WarehouseController {
     }
 
     @Transactional
-    @RequestMapping(value = "/warehouse/{warehouse_name}", method = RequestMethod.POST)
-    public Warehouse createWarehouse(@PathVariable("warehouse_name") String warehouseName, @RequestBody Warehouse warehouse) {
-        warehouse.setWarehouseName(warehouseName);
+    @RequestMapping(value = "/warehouse", method = RequestMethod.POST)
+    public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.createWarehouse(warehouse);
     }
 
     @Transactional
-    @RequestMapping(value = "/warehouse/{warehouse_name}", method = RequestMethod.GET)
-    public Optional<Warehouse> getWarehouse(@PathVariable("warehouse_name") String warehouseName) {
-        Optional<Warehouse> warehouse = warehouseService.getWarehouse(warehouseName);
+    @RequestMapping(value = "/warehouse/{id}", method = RequestMethod.GET)
+    public Optional<Warehouse> getWarehouse(@PathVariable("id") Long id) {
+        Optional<Warehouse> warehouse = warehouseService.getWarehouse(id);
         if (!warehouse.isPresent()) {
-            throw new ResourceNotFoundException("warehouse", "warehouse name", warehouseName);
+            throw new ResourceNotFoundException("warehouse", "id", id);
         }
-        return warehouseService.getWarehouse(warehouseName);
+        return warehouse;
     }
 
     @Transactional

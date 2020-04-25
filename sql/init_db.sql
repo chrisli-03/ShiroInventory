@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS tb_restock_detail (
 );
 CREATE TABLE IF NOT EXISTS tb_warehouse (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	warehouse_name VARCHAR(255) NOT NULL
+	warehouse_name VARCHAR(255) NOT NULL,
+	warehouse_address VARCHAR(255)
 );
 CREATE TABLE IF NOT EXISTS tb_supplier (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
