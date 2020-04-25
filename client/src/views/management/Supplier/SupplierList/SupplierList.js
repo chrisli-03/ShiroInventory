@@ -3,24 +3,24 @@ import { connect } from 'react-redux'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
-import './Warehouse.scss'
+import './SupplierList.scss'
 
 const TableLayout = React.lazy(() => import(/* webpackChunkName: "components/layouts/TableLayout" */ '~/components/layouts/TableLayout/TableLayout'))
-const tableKey = tableInfo.warehouse.key
-const columns = tableInfo.warehouse.columns
+const tableKey = tableInfo.supplier.key
+const columns = tableInfo.supplier.columns
 
-const Warehouse = ({ loading, size, dataSource, getWarehouseSize, getWarehouse }) => {
+const SupplierList = ({ loading, size, dataSource, getSupplierSize, getSupplier }) => {
   const onChange = (current, size) => {
-    getWarehouse(current, size)
+    getSupplier(current, size)
   }
 
   useEffect(() => {
-    getWarehouseSize()
-  }, [getWarehouseSize])
+    getSupplierSize()
+  }, [getSupplierSize])
 
   useEffect(() => {
-    if (size > 1) getWarehouse(1, 10)
-  }, [size, getWarehouse])
+    if (size > 1) getSupplier(1, 10)
+  }, [size, getSupplier])
 
   return (
     <TableLayout
@@ -30,7 +30,7 @@ const Warehouse = ({ loading, size, dataSource, getWarehouseSize, getWarehouse }
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary">New Warehouse</Button>
+          <Button type="primary">New Supplier</Button>
         </React.Fragment>
       }
       onChange={onChange}
@@ -46,11 +46,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getWarehouseSize: () => dispatch(getListSize(tableKey)),
-  getWarehouse: (page, size) => dispatch(getList(page, size, tableKey))
+  getSupplierSize: () => dispatch(getListSize(tableKey)),
+  getSupplier: (page, size) => dispatch(getList(page, size, tableKey))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Warehouse)
+)(SupplierList)

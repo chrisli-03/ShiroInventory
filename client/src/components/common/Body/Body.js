@@ -15,9 +15,7 @@ const Body = () => {
             routeList.map(route => {
               const Component = route.component
               return (
-                <Route path={`/${route.path}`} key={route.path}>
-                  <Component />
-                </Route>
+                <Route path={`/${route.path}`} key={route.path} render={props => <Component {...props} routes={route.children} />} />
               )
             })
           }

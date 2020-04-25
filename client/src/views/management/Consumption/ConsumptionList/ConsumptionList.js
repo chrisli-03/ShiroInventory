@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
-import './Consumption.scss'
+import './ConsumptionList.scss'
 
 const TableLayout = React.lazy(() => import(/* webpackChunkName: "components/layouts/TableLayout" */ '~/components/layouts/TableLayout/TableLayout'))
 const tableKey = tableInfo.consumption.key
 const columns = tableInfo.consumption.columns
 
-const Consumption = ({ loading, size, dataSource, getConsumptionSize, getConsumption }) => {
+const ConsumptionList = ({ loading, size, dataSource, getConsumptionSize, getConsumption }) => {
   const onChange = (current, size) => {
     getConsumption(current, size)
   }
@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Consumption)
+)(ConsumptionList)

@@ -1,26 +1,33 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
-import './Supplier.scss'
+import './WarehouseList.scss'
 
 const TableLayout = React.lazy(() => import(/* webpackChunkName: "components/layouts/TableLayout" */ '~/components/layouts/TableLayout/TableLayout'))
-const tableKey = tableInfo.supplier.key
-const columns = tableInfo.supplier.columns
+const tableKey = tableInfo.warehouse.key
+const columns = tableInfo.warehouse.columns
 
-const Supplier = ({ loading, size, dataSource, getSupplierSize, getSupplier }) => {
+const WarehouseList = ({ loading, size, dataSource, getWarehouseSize, getWarehouse }) => {
+  const history = useHistory()
+  
   const onChange = (current, size) => {
-    getSupplier(current, size)
+    getWarehouse(current, size)
+  }
+
+  const redirectTo = path => {
+    history.push(path)
   }
 
   useEffect(() => {
-    getSupplierSize()
-  }, [getSupplierSize])
+    getWarehouseSize()
+  }, [getWarehouseSize])
 
   useEffect(() => {
-    if (size > 1) getSupplier(1, 10)
-  }, [size, getSupplier])
+    if (size > 1) getWarehouse(1, 10)
+  }, [size, getWarehouse])
 
   return (
     <TableLayout
@@ -30,7 +37,7 @@ const Supplier = ({ loading, size, dataSource, getSupplierSize, getSupplier }) =
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary">New Supplier</Button>
+          <Button type="primary" onClick={() => redirectTo('/warehouse/new')}>New Warehouse</Button>
         </React.Fragment>
       }
       onChange={onChange}
@@ -46,11 +53,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getSupplierSize: () => dispatch(getListSize(tableKey)),
-  getSupplier: (page, size) => dispatch(getList(page, size, tableKey))
+  getWarehouseSize: () => dispatch(getListSize(tableKey)),
+  getWarehouse: (page, size) => dispatch(getList(page, size, tableKey))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Supplier)
+)(WarehouseList)

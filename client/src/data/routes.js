@@ -1,11 +1,13 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import(/* webpackChunkName: "views/main/Dashboard" */ '~/views/main/Dashboard/Dashboard'))
-const Inventory = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory" */ '~/views/management/Inventory/Inventory'))
-const Restock = React.lazy(() => import(/* webpackChunkName: "views/management/Restock" */ '~/views/management/Restock/Restock'))
-const Consumption = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption" */ '~/views/management/Consumption/Consumption'))
-const Warehouse = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse" */ '~/views/management/Warehouse/Warehouse'))
-const Supplier = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier" */ '~/views/management/Supplier/Supplier'))
+const TableWrapper = React.lazy(() => import(/* webpackChunkName: "components/wrappers/TableWrapper" */ '~/components/wrappers/TableWrapper/TableWrapper'))
+const InventoryList = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory/InventoryList" */ '~/views/management/Inventory/InventoryList/InventoryList'))
+const RestockList = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockList" */ '~/views/management/Restock/RestockList/RestockList'))
+const ConsumptionList = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption/ConsumptionList" */ '~/views/management/Consumption/ConsumptionList/ConsumptionList'))
+const WarehouseList = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseList" */ '~/views/management/Warehouse/WarehouseList/WarehouseList'))
+const WarehouseNew = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseNew" */ '~/views/management/Warehouse/WarehouseNew/WarehouseNew'))
+const SupplierList = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierList" */ '~/views/management/Supplier/SupplierList/SupplierList'))
 
 const routes = [
   {
@@ -24,27 +26,61 @@ const routes = [
       {
         name: 'Inventory',
         path: 'inventory',
-        component: Inventory
+        component: TableWrapper,
+        children: [
+          {
+            path: 'list',
+            component: InventoryList
+          }
+        ]
       },
       {
         name: 'Restock',
         path: 'restock',
-        component: Restock
+        component: TableWrapper,
+        children: [
+          {
+            path: 'list',
+            component: RestockList
+          }
+        ]
       },
       {
         name: 'Consumption',
         path: 'consumption',
-        component: Consumption
+        component: TableWrapper,
+        children: [
+          {
+            path: 'list',
+            component: ConsumptionList
+          }
+        ]
       },
       {
         name: 'Warehouse',
         path: 'warehouse',
-        component: Warehouse
+        component: TableWrapper,
+        children: [
+          {
+            path: 'list',
+            component: WarehouseList
+          },
+          {
+            path: 'new',
+            component: WarehouseNew
+          }
+        ]
       },
       {
         name: 'Supplier',
         path: 'supplier',
-        component: Supplier
+        component: TableWrapper,
+        children: [
+          {
+            path: 'list',
+            component: SupplierList
+          }
+        ]
       }
     ]
   }
