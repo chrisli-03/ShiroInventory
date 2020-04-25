@@ -12,7 +12,7 @@ const columns = tableInfo.warehouse.columns
 
 const WarehouseList = ({ loading, size, dataSource, getWarehouseSize, getWarehouse }) => {
   const history = useHistory()
-  
+
   const onChange = (current, size) => {
     getWarehouse(current, size)
   }

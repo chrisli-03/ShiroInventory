@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+import './reset.scss'
 import Spinner from '~/components/Spinner/Spinner'
 import './app.scss'
 import './style/style.scss'
