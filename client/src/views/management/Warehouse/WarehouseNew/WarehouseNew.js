@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
-import './WarehouseNew.scss'
 import { useHistory } from 'react-router-dom'
+import { request } from '~/lib/api'
+import './WarehouseNew.scss'
 
 const formLayout = {
   labelCol: {
@@ -16,9 +17,9 @@ const formLayout = {
 
 const WarehouseNew = () => {
   const history = useHistory()
-  const [form] = Form.useForm()
-  const onFinish = () => {
-    console.log(123)
+  const onFinish = value => {
+    request('warehouse', 'post', { data: value })
+      .then(data => redirectTo('/warehouse/list'))
   }
 
   const redirectTo = path => {
@@ -29,13 +30,12 @@ const WarehouseNew = () => {
     <h6>New Warehouse</h6>
     <Form
       {...formLayout}
-      form={form}
       name="new_warehouse"
       className="page_form"
       onFinish={onFinish}
     >
       <Form.Item
-        name="warehouse_name"
+        name="warehouseName"
         label="Warehouse Name"
         rules={[
           {
@@ -47,7 +47,7 @@ const WarehouseNew = () => {
         <Input placeholder="Warehouse Name" />
       </Form.Item>
       <Form.Item
-        name="warehouse_address"
+        name="warehouseAddress"
         label="Warehouse Address"
       >
         <Input placeholder="Warehouse Address" />

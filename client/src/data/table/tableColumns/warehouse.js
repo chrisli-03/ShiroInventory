@@ -1,12 +1,12 @@
 export default [
   {
     title: 'Warehouse Name',
-    dataIndex: 'warehouse_name',
-    key: 'warehouse_name',
+    dataIndex: 'warehouseName',
+    key: 'warehouseName',
   },
   {
     title: 'Address',
-    dataIndex: 'supplier_address',
-    key: 'supplier_address'
+    dataIndex: 'warehouseAddress',
+    key: 'warehouseAddress'
   }
 ]

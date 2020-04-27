@@ -17,7 +17,17 @@ module.exports = merge(common, {
     host: '0.0.0.0',
     port: 8081,
     open: true,
-    public: 'localhost:8081'
+    public: 'localhost:8081',
+    proxy: {
+      '/': {
+        target: 'http://localhost:8080',
+        bypass: function(req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            return '/index.html';
+          }
+        }
+      }
+    }
   },
   module: {
     rules: [
