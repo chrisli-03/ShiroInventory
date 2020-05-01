@@ -1,22 +1,22 @@
 export default [
   {
     title: 'Supplier Name',
-    dataIndex: 'supplier_name',
-    key: 'supplier_name',
+    dataIndex: 'supplierName',
+    key: 'supplierName',
   },
   {
     title: 'Address',
-    dataIndex: 'supplier_address',
-    key: 'supplier_address'
+    dataIndex: 'supplierAddress',
+    key: 'supplierAddress'
   },
   {
     title: 'Contact',
-    dataIndex: 'supplier_contact',
-    key: 'supplier_contact'
+    dataIndex: 'supplierContact',
+    key: 'supplierContact'
   },
   {
     title: 'Contact Name',
-    dataIndex: 'contact_name',
-    key: 'contact_name'
+    dataIndex: 'supplierContactName',
+    key: 'supplierContactName'
   }
 ]

@@ -8,6 +8,7 @@ const ConsumptionList = React.lazy(() => import(/* webpackChunkName: "views/mana
 const WarehouseList = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseList" */ '~/views/management/Warehouse/WarehouseList/WarehouseList'))
 const WarehouseNew = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseNew" */ '~/views/management/Warehouse/WarehouseNew/WarehouseNew'))
 const SupplierList = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierList" */ '~/views/management/Supplier/SupplierList/SupplierList'))
+const SupplierNew = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierNew" */ '~/views/management/Supplier/SupplierNew/SupplierNew'))
 
 const routes = [
   {
@@ -79,6 +80,10 @@ const routes = [
           {
             path: 'list',
             component: SupplierList
+          },
+          {
+            path: 'new',
+            component: SupplierNew
           }
         ]
       }

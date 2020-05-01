@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
@@ -10,8 +11,14 @@ const tableKey = tableInfo.supplier.key
 const columns = tableInfo.supplier.columns
 
 const SupplierList = ({ loading, size, dataSource, getSupplierSize, getSupplier }) => {
+  const history = useHistory()
+
   const onChange = (current, size) => {
     getSupplier(current, size)
+  }
+
+  const redirectTo = path => {
+    history.push(path)
   }
 
   useEffect(() => {
@@ -19,7 +26,7 @@ const SupplierList = ({ loading, size, dataSource, getSupplierSize, getSupplier 
   }, [getSupplierSize])
 
   useEffect(() => {
-    if (size > 1) getSupplier(1, 10)
+    if (size > 0) getSupplier(1, 10)
   }, [size, getSupplier])
 
   return (
@@ -30,7 +37,7 @@ const SupplierList = ({ loading, size, dataSource, getSupplierSize, getSupplier 
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary">New Supplier</Button>
+          <Button type="primary" onClick={() => redirectTo('/supplier/new')}>New Supplier</Button>
         </React.Fragment>
       }
       onChange={onChange}

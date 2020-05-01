@@ -18,7 +18,7 @@ const InventoryList = ({ loading, size, dataSource, getInventorySize, getInvento
   }, [getInventorySize])
 
   useEffect(() => {
-    if (size > 1) getInventory(1, 10)
+    if (size > 0) getInventory(1, 10)
   }, [size, getInventory])
 
   return (

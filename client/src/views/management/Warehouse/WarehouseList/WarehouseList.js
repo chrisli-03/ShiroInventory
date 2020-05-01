@@ -26,7 +26,7 @@ const WarehouseList = ({ loading, size, dataSource, getWarehouseSize, getWarehou
   }, [getWarehouseSize])
 
   useEffect(() => {
-    if (size > 1) getWarehouse(1, 10)
+    if (size > 0) getWarehouse(1, 10)
   }, [size, getWarehouse])
 
   return (

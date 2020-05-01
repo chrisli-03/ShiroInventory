@@ -19,7 +19,7 @@ const RestockList = ({ loading, size, dataSource, getRestockSize, getRestock }) 
   }, [getRestockSize])
 
   useEffect(() => {
-    if (size > 1) getRestock(1, 10)
+    if (size > 0) getRestock(1, 10)
   }, [size, getRestock])
 
   return (

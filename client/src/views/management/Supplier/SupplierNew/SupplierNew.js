@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { request } from '~/lib/api'
-import './WarehouseNew.scss'
+import './SupplierNew.scss'
 
 const formLayout = {
   labelCol: {
@@ -15,11 +15,11 @@ const formLayout = {
   }
 }
 
-const WarehouseNew = () => {
+const SupplierNew = () => {
   const history = useHistory()
   const onFinish = value => {
-    request('warehouse', 'post', { data: value })
-      .then(data => redirectTo('/warehouse/list'))
+    request('supplier', 'post', { data: value })
+      .then(data => redirectTo('/supplier/list'))
   }
 
   const redirectTo = path => {
@@ -27,16 +27,16 @@ const WarehouseNew = () => {
   }
 
   return <div>
-    <h6>New Warehouse</h6>
+    <h6>New Supplier</h6>
     <Form
       {...formLayout}
-      name="new_warehouse"
+      name="new_supplier"
       className="page_form"
       onFinish={onFinish}
     >
       <Form.Item
-        name="warehouseName"
-        label="Warehouse Name"
+        name="supplierName"
+        label="Supplier Name"
         rules={[
           {
             required: true,
@@ -44,13 +44,25 @@ const WarehouseNew = () => {
           }
         ]}
       >
-        <Input placeholder="Warehouse Name" />
+        <Input placeholder="Supplier Name" />
       </Form.Item>
       <Form.Item
-        name="warehouseAddress"
-        label="Warehouse Address"
+        name="supplierAddress"
+        label="Supplier Address"
       >
-        <Input placeholder="Warehouse Address" />
+        <Input placeholder="Supplier Address" />
+      </Form.Item>
+      <Form.Item
+        name="supplierContact"
+        label="Supplier Contact"
+      >
+        <Input placeholder="Supplier Contact" />
+      </Form.Item>
+      <Form.Item
+        name="supplierContactName"
+        label="Supplier Contact Name"
+      >
+        <Input placeholder="Supplier Contact Name" />
       </Form.Item>
       <Form.Item
         wrapperCol={{
@@ -59,10 +71,10 @@ const WarehouseNew = () => {
         }}
       >
         <Button type="primary" htmlType="submit">Create</Button>
-        <Button className="ml-3" type="default" onClick={() => redirectTo('/warehouse/list')}>Cancel</Button>
+        <Button className="ml-3" type="default" onClick={() => redirectTo('/supplier/list')}>Cancel</Button>
       </Form.Item>
     </Form>
   </div>
 }
 
-export default WarehouseNew
+export default SupplierNew
