@@ -5,7 +5,10 @@ import com.shiros.inventory.entity.RestockFormDetail;
 import com.shiros.inventory.repository.RestockFormDetailRepository;
 import com.shiros.inventory.repository.RestockFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RestockServiceImpl implements RestockService {
@@ -29,6 +32,16 @@ public class RestockServiceImpl implements RestockService {
     @Override
     public RestockFormDetail createRestockFormDetail(RestockFormDetail restockFormDetail) {
         return restockFormDetailRepository.save(restockFormDetail);
+    }
+
+    @Override
+    public Long getRestockCount() {
+        return restockFormRepository.count();
+    }
+
+    @Override
+    public List<RestockForm> getRestocks(int page, int size) {
+        return restockFormRepository.find(PageRequest.of(page-1, size));
     }
 
 }

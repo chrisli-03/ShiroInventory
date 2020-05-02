@@ -1,17 +1,17 @@
 export default [
   {
     title: 'Form ID',
-    dataIndex: 'form_id',
-    key: 'form_id',
+    dataIndex: 'formID',
+    key: 'formID',
   },
   {
     title: 'Supplier',
-    dataIndex: 'supplier_name',
-    key: 'supplier_name',
+    dataIndex: 'supplier',
+    key: 'supplier',
   },
   {
-    title: 'Total',
-    dataIndex: 'total',
-    key: 'total'
+    title: 'Creation Date',
+    dataIndex: 'creationDate',
+    key: 'creationDate'
   }
 ]

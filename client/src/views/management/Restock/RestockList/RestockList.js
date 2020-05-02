@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
@@ -10,8 +11,14 @@ const tableKey = tableInfo.restock.key
 const columns = tableInfo.restock.columns
 
 const RestockList = ({ loading, size, dataSource, getRestockSize, getRestock }) => {
+  const history = useHistory()
+
   const onChange = (current, size) => {
     getRestock(current, size)
+  }
+
+  const redirectTo = path => {
+    history.push(path)
   }
 
   useEffect(() => {
@@ -30,7 +37,7 @@ const RestockList = ({ loading, size, dataSource, getRestockSize, getRestock }) 
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary">New Restock</Button>
+          <Button type="primary" onClick={() => redirectTo('/restock/new')}>New Restock</Button>
         </React.Fragment>
       }
       onChange={onChange}

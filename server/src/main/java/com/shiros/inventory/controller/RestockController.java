@@ -7,10 +7,7 @@ import com.shiros.inventory.service.InventoryItemService;
 import com.shiros.inventory.service.RestockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -83,6 +80,18 @@ public class RestockController {
 
         // add restock form to restock form table
         return restockService.createRestockForm(restockForm);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/restock", method = RequestMethod.GET)
+    public List<RestockForm> getRestocks(@RequestParam int page, @RequestParam int size) {
+        return restockService.getRestocks(page, size);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/restock_count", method = RequestMethod.GET)
+    public Long getRestockCount() {
+        return restockService.getRestockCount();
     }
 
 }
