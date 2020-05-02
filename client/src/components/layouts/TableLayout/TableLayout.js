@@ -46,6 +46,7 @@ const TableLayout = ({ loading, buttons, size, dataSource, columns, onChange, on
         total={size}
         onChange={onChange}
         onShowSizeChange={onShowSizeChange}
+        showSizeChanger={true}
       />
     </div>
   )
