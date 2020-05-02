@@ -3,6 +3,7 @@ package com.shiros.inventory.service;
 import com.shiros.inventory.entity.Warehouse;
 import com.shiros.inventory.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public List<Warehouse> getAllWarehouses() {
-        return (List<Warehouse>) warehouseRepository.findAll();
+    public List<Warehouse> getWarehouses(int page, int size) {
+        return (List<Warehouse>) warehouseRepository.find(PageRequest.of(page-1, size));
     }
 
     @Override

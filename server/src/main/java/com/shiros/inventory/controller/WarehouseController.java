@@ -38,8 +38,8 @@ public class WarehouseController {
 
     @Transactional
     @RequestMapping(value = "/warehouse", method = RequestMethod.GET)
-    public List<Warehouse> getAllWarehouses() {
-        return warehouseService.getAllWarehouses();
+    public List<Warehouse> getWarehouses(@RequestParam int page, @RequestParam int size) {
+        return warehouseService.getWarehouses(page, size);
     }
 
     @Transactional

@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const request = (url, method, params = {}, success, failed) => {
+export const request = (url, method, params = {}, query = '', success, failed) => {
   return axios({
-    url: `/${url}`,
+    url: `/${url}` + (query === '' ? '' : `?${query}`),
     method,
     ...params
   })

@@ -3,6 +3,7 @@ package com.shiros.inventory.service;
 import com.shiros.inventory.entity.Supplier;
 import com.shiros.inventory.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +29,9 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<Supplier> getAllSuppliers() {
-        return (List<Supplier>) supplierRepository.findAll();
+    public List<Supplier> getSuppliers(int page, int size) {
+
+        return (List<Supplier>) supplierRepository.find(PageRequest.of(page-1, size));
     }
 
     @Override

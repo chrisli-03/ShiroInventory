@@ -37,8 +37,8 @@ public class SupplierController {
 
     @Transactional
     @RequestMapping(value = "/supplier", method = RequestMethod.GET)
-    public List<Supplier> getAllSupplier() {
-        return supplierService.getAllSuppliers();
+    public List<Supplier> getSupplier(@RequestParam int page, @RequestParam int size) {
+        return supplierService.getSuppliers(page, size);
     }
 
     @Transactional
