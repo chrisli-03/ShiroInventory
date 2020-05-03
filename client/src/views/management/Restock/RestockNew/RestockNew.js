@@ -1,19 +1,8 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Row, Col, Input, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { request } from '~/lib/api'
 import './RestockNew.scss'
-
-const formLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 }
-  }
-}
 
 const RestockNew = () => {
   const history = useHistory()
@@ -29,35 +18,35 @@ const RestockNew = () => {
   return <div>
     <h6>New Restock</h6>
     <Form
-      {...formLayout}
       name="new_restock"
       className="page_form"
       onFinish={onFinish}
     >
-      <Form.Item
-        name="formID"
-        label="Form ID"
-        rules={[
-          {
-            required: true,
-            message: 'Please input form ID'
-          }
-        ]}
-      >
-        <Input placeholder="Form ID" />
-      </Form.Item>
-      <Form.Item
-        name="supplier"
-        label="Supplier"
-      >
-        <Input placeholder="Supplier" />
-      </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          xs: { span: 24, offset: 0 },
-          sm: { span: 16, offset: 8 }
-        }}
-      >
+      <Row gutter={24}>
+        <Col xs={24} md={12} lg={8}>
+          <Form.Item
+            name="formID"
+            label="Form ID"
+            rules={[
+              {
+                required: true,
+                message: 'Please input form ID'
+              }
+            ]}
+          >
+            <Input placeholder="Form ID" />
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={12} lg={8}>
+          <Form.Item
+            name="supplier"
+            label="Supplier"
+          >
+            <Input placeholder="Supplier" />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Form.Item>
         <Button type="primary" htmlType="submit">Create</Button>
         <Button className="ml-3" type="default" onClick={() => redirectTo('/restock/list')}>Cancel</Button>
       </Form.Item>

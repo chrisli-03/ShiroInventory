@@ -1,5 +1,33 @@
-.page_form .ant-form-item {
-  max-width: 530px;
+.page_form {
+  max-width: 1000px;
+
+  .ant-form-item {
+    display: block;
+  }
+
+  .ant-form-item-label {
+    text-align: left;
+
+    & > label::after {
+      content: '';
+      display: none;
+    }
+
+    & > label.ant-form-item-required::before {
+      content: '';
+      display: none;
+    }
+
+    & > label.ant-form-item-required::after {
+      display: inline-block;
+      margin-right: 4px;
+      color: #ff4d4f;
+      font-size: 14px;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+      content: '*';
+    }
+  }
 }
 
 .ml-3 {
