@@ -20,7 +20,7 @@ module.exports = merge(common, {
     public: 'localhost:8081',
     proxy: {
       '/': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:3000',
         bypass: function(req, res, proxyOptions) {
           if (req.headers.accept.indexOf('html') !== -1) {
             return '/index.html';

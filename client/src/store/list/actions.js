@@ -40,7 +40,9 @@ export function getListSize(key) {
 export function getList(page, size, key) {
   return dispatch => {
     dispatch(setLoading(true, key))
-    request(`${key}`, 'get', null, `page=${page}&size=${size}`).then(data => {
+    let query = ''
+    if (size && key) query = `page=${page}&size=${size}`
+    request(`${key}`, 'get', null, query).then(data => {
       dispatch(setList(data.map((n, i) => ({ ...n, key: i })), key))
       dispatch(setLoading(false, key))
     })

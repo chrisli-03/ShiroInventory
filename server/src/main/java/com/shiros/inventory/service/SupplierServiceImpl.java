@@ -29,6 +29,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public List<Supplier> getAllSuppliers() {
+        return (List<Supplier>) supplierRepository.findAll();
+    }
+
+    @Override
     public List<Supplier> getSuppliers(int page, int size) {
 
         return (List<Supplier>) supplierRepository.find(PageRequest.of(page-1, size));

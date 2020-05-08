@@ -9,6 +9,7 @@ public interface SupplierService {
 
     public Supplier createSupplier(Supplier supplier);
     public Optional<Supplier> getSupplier(Long id);
+    public List<Supplier> getAllSuppliers();
     public List<Supplier> getSuppliers(int page, int size);
     public Long getSupplierCount();
 
