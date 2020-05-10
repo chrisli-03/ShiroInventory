@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { request } from '~/lib/api'
 import './SupplierNew.scss'
 
@@ -64,7 +64,7 @@ const SupplierNew = () => {
       </Row>
       <Form.Item>
         <Button type="primary" htmlType="submit">Create</Button>
-        <Button className="ml-3" type="default" onClick={() => redirectTo('/supplier/list')}>Cancel</Button>
+        <Link to='/supplier/list'><Button className="ml-3" type="default">Cancel</Button></Link>
       </Form.Item>
     </Form>
   </div>

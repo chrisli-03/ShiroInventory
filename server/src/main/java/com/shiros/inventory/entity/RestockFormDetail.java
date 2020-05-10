@@ -15,11 +15,17 @@ public class RestockFormDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Transient
     private String itemName;
+
+    @Transient
     private String itemCode;
 
     @Column(name="item")
     private Long item;
+
+    @Column(name="warehouse")
+    private Long warehouse;
 
     @Column(name="item_spec")
     private String itemSpec;
@@ -32,14 +38,6 @@ public class RestockFormDetail {
 
     @Column(name="restock_form")
     private Long restockForm;
-
-    public Long getItem() {
-        return item;
-    }
-
-    public void setItem(Long item) {
-        this.item = item;
-    }
 
     public String getItemName() {
         return itemName;
@@ -55,6 +53,22 @@ public class RestockFormDetail {
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
+    }
+
+    public Long getItem() {
+        return item;
+    }
+
+    public void setItem(Long item) {
+        this.item = item;
+    }
+
+    public Long getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Long warehouse) {
+        this.warehouse = warehouse;
     }
 
     public String getItemSpec() {

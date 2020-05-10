@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { Form, Row, Col, Input, InputNumber, Select, Button } from 'antd'
 import { PlusOutlined } from "@ant-design/icons"
 import { request } from '~/lib/api'
@@ -12,11 +12,13 @@ import 'antd/es/table/style/css'
 
 const { Option } = Select;
 
-const tableKey = tableInfo.supplier.key
+const supplierKey = tableInfo.supplier.key
+const warehouseKey = tableInfo.warehouse.key
 
-const RestockNew = ({ loading, dataSource, getSupplier }) => {
+const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse }) => {
 
-  const options = dataSource.map((supplier, i) => <Option value={supplier.id} key={i}>{supplier.supplierName}</Option>)
+  const supplierOptions = suppliers.map((supplier, i) => <Option value={supplier.id} key={i}>{supplier.supplierName}</Option>)
+  const warehouseOptions = warehouses.map((warehouse, i) => <Option value={warehouse.id} key={i}>{warehouse.warehouseName}</Option>)
 
   const history = useHistory()
   const [form] = Form.useForm()
@@ -35,6 +37,10 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
   useEffect(() => {
     getSupplier()
   }, [getSupplier])
+
+  useEffect(() => {
+    getWarehouse()
+  }, [getWarehouse])
 
   if (loading) {
     return <Spinner />
@@ -82,7 +88,7 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {options}
+              {supplierOptions}
             </Select>
           </Form.Item>
         </Col>
@@ -90,7 +96,7 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
       <Form.List name="detail">
         {(fields, { add, remove }) => (
           <div className="ant-table ant-table-small ant-table-fixed-header">
-            <table style={{tableLayout: "auto", width: '100%'}}>
+            <table style={{tableLayout: "fixed", width: '100%'}}>
               <colgroup></colgroup>
               <thead className="ant-table-thead">
                 <tr>
@@ -140,7 +146,16 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
                         className="mb-0 no-message"
                         rules={[{ required: true }]}
                       >
-                        <Input placeholder="Warehouse" />
+                        <Select
+                          showSearch
+                          placeholder="Warehouse"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                          }
+                        >
+                          {warehouseOptions}
+                        </Select>
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
@@ -206,19 +221,21 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
       </Form.List>
       <Form.Item>
         <Button type="primary" htmlType="submit">Create</Button>
-        <Button className="ml-3" type="default" onClick={() => redirectTo('/restock/list')}>Cancel</Button>
+        <Link to='/restock/list'><Button className="ml-3" type="default">Cancel</Button></Link>
       </Form.Item>
     </Form>
   </div>
 }
 
 const mapStateToProps = state => ({
-  loading: state.list[tableKey].loading,
-  dataSource: state.list[tableKey].dataSource
+  loading: state.list[supplierKey].loading && state.list[warehouseKey].loading,
+  suppliers: state.list[supplierKey].dataSource,
+  warehouses: state.list[warehouseKey].dataSource
 })
 
 const mapDispatchToProps = dispatch => ({
-  getSupplier: (page, size) => dispatch(getList(page, size, tableKey))
+  getSupplier: (page, size) => dispatch(getList(page, size, supplierKey)),
+  getWarehouse: (page, size) => dispatch(getList(page, size, warehouseKey))
 })
 
 export default connect(

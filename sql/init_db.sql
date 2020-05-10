@@ -13,11 +13,12 @@ CREATE TABLE IF NOT EXISTS tb_restock (
 );
 CREATE TABLE IF NOT EXISTS tb_restock_detail (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	item VARCHAR(255) NOT NULL,
 	item_spec VARCHAR(255),
 	item_price FLOAT NOT NULL,
 	item_quantity INT NOT NULL,
-	restock_form INT NOT NULL
+	item VARCHAR(255) NOT NULL,
+	restock_form INT NOT NULL,
+	warehouse INT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS tb_warehouse (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,

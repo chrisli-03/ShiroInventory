@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
@@ -11,14 +11,8 @@ const tableKey = tableInfo.warehouse.key
 const columns = tableInfo.warehouse.columns
 
 const WarehouseList = ({ loading, size, dataSource, getWarehouseSize, getWarehouse }) => {
-  const history = useHistory()
-
   const onChange = (current, size) => {
     getWarehouse(current, size)
-  }
-
-  const redirectTo = path => {
-    history.push(path)
   }
 
   useEffect(() => {
@@ -37,7 +31,7 @@ const WarehouseList = ({ loading, size, dataSource, getWarehouseSize, getWarehou
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary" onClick={() => redirectTo('/warehouse/new')}>New Warehouse</Button>
+          <Link to='/warehouse/new'><Button type="primary">New Warehouse</Button></Link>
         </React.Fragment>
       }
       onChange={onChange}

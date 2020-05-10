@@ -30,6 +30,11 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
+    public List<Warehouse> getAllWarehouses() {
+        return (List<Warehouse>) warehouseRepository.findAll();
+    }
+
+    @Override
     public List<Warehouse> getWarehouses(int page, int size) {
         return (List<Warehouse>) warehouseRepository.find(PageRequest.of(page-1, size));
     }
