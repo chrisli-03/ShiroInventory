@@ -7,5 +7,8 @@ export const request = (url, method, params = {}, query = '', success, failed) =
     ...params
   })
     .then(response => response.data)
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      throw error
+    })
 }

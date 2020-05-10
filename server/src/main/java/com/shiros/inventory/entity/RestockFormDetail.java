@@ -16,9 +16,10 @@ public class RestockFormDetail {
     private Long id;
 
     private String itemName;
-
-    @Column(name="item_code")
     private String itemCode;
+
+    @Column(name="item")
+    private Long item;
 
     @Column(name="item_spec")
     private String itemSpec;
@@ -29,8 +30,16 @@ public class RestockFormDetail {
     @Column(name="item_quantity")
     private int itemQuantity;
 
-    @Column(name="restock_form_id")
-    private String restockFormID;
+    @Column(name="restock_form")
+    private Long restockForm;
+
+    public Long getItem() {
+        return item;
+    }
+
+    public void setItem(Long item) {
+        this.item = item;
+    }
 
     public String getItemName() {
         return itemName;
@@ -72,11 +81,11 @@ public class RestockFormDetail {
         this.itemQuantity = itemQuantity;
     }
 
-    public String getRestockFormID() {
-        return restockFormID;
+    public Long getRestockForm() {
+        return restockForm;
     }
 
-    public void setRestockFormID(String restockFormID) {
-        this.restockFormID = restockFormID;
+    public void setRestockForm(Long restockForm) {
+        this.restockForm = restockForm;
     }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Form, Row, Col, Input, Select, Button } from 'antd'
+import { Form, Row, Col, Input, InputNumber, Select, Button } from 'antd'
 import { PlusOutlined } from "@ant-design/icons"
 import { request } from '~/lib/api'
 import tableInfo from '~/data/table/tableInfo'
@@ -22,6 +22,8 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
   const [form] = Form.useForm()
 
   const onFinish = value => {
+    if (!value.detail) value.detail = []
+    value.detail.forEach(n => n.itemPrice = Number(n.itemPrice))
     request('restock', 'post', { data: value })
       .then(data => redirectTo('/restock/list'))
   }
@@ -65,6 +67,12 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
           <Form.Item
             name="supplier"
             label="Supplier"
+            rules={[
+              {
+                required: true,
+                message: 'Please select warehouse'
+              }
+            ]}
           >
             <Select
               showSearch
@@ -100,33 +108,60 @@ const RestockNew = ({ loading, dataSource, getSupplier }) => {
                 {fields.map((field, index) => (
                   <tr data-row-key="1" className="ant-table-row ant-table-row-level-0" key={index}>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "itemName"]} noStyle>
+                      <Form.Item
+                        name={[index, "itemName"]}
+                        className="mb-0 no-message"
+                        rules={[{ required: true }]}
+                      >
                         <Input placeholder="Item Name" />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "itemCode"]} noStyle>
+                      <Form.Item
+                        name={[index, "itemCode"]}
+                        className="mb-0 no-message"
+                        rules={[{ required: true }]}
+                      >
                         <Input placeholder="Item Code" />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "itemSpec"]} noStyle>
+                      <Form.Item
+                        name={[index, "itemSpec"]}
+                        className="mb-0 no-message"
+                        rules={[{ required: true }]}
+                      >
                         <Input placeholder="Specification" />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "warehouse"]} noStyle>
+                      <Form.Item
+                        name={[index, "warehouse"]}
+                        className="mb-0 no-message"
+                        rules={[{ required: true }]}
+                      >
                         <Input placeholder="Warehouse" />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "itemPrice"]} noStyle>
+                      <Form.Item
+                        name={[index, "itemPrice"]}
+                        className="mb-0 no-message"
+                        rules={[
+                          { required: true },
+                          { type: 'number', transform: value => Number(value) }
+                        ]}
+                      >
                         <Input placeholder="Unit Price" prefix={'￥'} />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
-                      <Form.Item name={[index, "itemQuantity"]} noStyle>
-                        <Input placeholder="Quantity" />
+                      <Form.Item
+                        name={[index, "itemQuantity"]}
+                        className="mb-0 no-message"
+                        rules={[{ required: true }]}
+                      >
+                        <InputNumber placeholder="Quantity" />
                       </Form.Item>
                     </td>
                     <td className="ant-table-cell">
