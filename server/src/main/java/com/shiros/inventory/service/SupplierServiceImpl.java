@@ -1,6 +1,7 @@
 package com.shiros.inventory.service;
 
 import com.shiros.inventory.entity.Supplier;
+import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -24,8 +25,12 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Optional<Supplier> getSupplier(Long id) {
-        return supplierRepository.findById(id);
+    public Supplier getSupplierById(Long id) {
+        Optional<Supplier> supplier = supplierRepository.findById(id);
+        if (!supplier.isPresent()) {
+            throw new ResourceNotFoundException("supplier", "id", id);
+        }
+        return supplier.get();
     }
 
     @Override
@@ -35,7 +40,6 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public List<Supplier> getSuppliers(int page, int size) {
-
         return (List<Supplier>) supplierRepository.find(PageRequest.of(page-1, size));
     }
 

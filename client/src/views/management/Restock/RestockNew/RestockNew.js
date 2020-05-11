@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, useParams, Link } from 'react-router-dom'
 import { Form, Row, Col, Input, InputNumber, Select, Button } from 'antd'
 import { PlusOutlined } from "@ant-design/icons"
 import { request } from '~/lib/api'
@@ -16,12 +16,12 @@ const supplierKey = tableInfo.supplier.key
 const warehouseKey = tableInfo.warehouse.key
 
 const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse }) => {
+  const { id } = useParams()
+  const history = useHistory()
+  const [form] = Form.useForm()
 
   const supplierOptions = suppliers.map((supplier, i) => <Option value={supplier.id} key={i}>{supplier.supplierName}</Option>)
   const warehouseOptions = warehouses.map((warehouse, i) => <Option value={warehouse.id} key={i}>{warehouse.warehouseName}</Option>)
-
-  const history = useHistory()
-  const [form] = Form.useForm()
 
   const onFinish = value => {
     if (!value.detail) value.detail = []

@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-class NewRestockEntity {
+class RestockEntity {
 
     private String formID;
     private String supplier;
@@ -59,7 +58,7 @@ public class RestockController {
 
     @Transactional
     @RequestMapping(value = "/restock", method = RequestMethod.POST)
-    public RestockForm createRestock(@RequestBody NewRestockEntity newRestockEntity) {
+    public RestockForm createRestock(@RequestBody RestockEntity newRestockEntity) {
         // required variables
         RestockForm restockForm = restockService.createRestockForm(newRestockEntity.getRestockForm());
         List<RestockFormDetail> restockFormDetails = newRestockEntity.getDetail();
@@ -96,6 +95,18 @@ public class RestockController {
     @RequestMapping(value = "/restock_count", method = RequestMethod.GET)
     public Long getRestockCount() {
         return restockService.getRestockCount();
+    }
+
+
+    @Transactional
+    @RequestMapping(value = "/restock/{id}", method = RequestMethod.GET)
+    public RestockEntity getRestockFormById(@PathVariable("id") long id) {
+        RestockForm restockForm = restockService.getRestockFormById(id);
+        RestockEntity restockEntity = new RestockEntity();
+        restockEntity.setFormID(restockForm.getFormID());
+        restockEntity.setSupplier(restockForm.getSupplier());
+
+        return restockEntity;
     }
 
 }

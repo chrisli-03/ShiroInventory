@@ -28,12 +28,8 @@ public class WarehouseController {
 
     @Transactional
     @RequestMapping(value = "/warehouse/{id}", method = RequestMethod.GET)
-    public Optional<Warehouse> getWarehouse(@PathVariable("id") Long id) {
-        Optional<Warehouse> warehouse = warehouseService.getWarehouse(id);
-        if (!warehouse.isPresent()) {
-            throw new ResourceNotFoundException("warehouse", "id", id);
-        }
-        return warehouse;
+    public Warehouse getWarehouseById(@PathVariable("id") Long id) {
+        return warehouseService.getWarehouseById(id);
     }
 
     @Transactional

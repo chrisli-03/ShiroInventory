@@ -1,6 +1,7 @@
 package com.shiros.inventory.service;
 
 import com.shiros.inventory.entity.Warehouse;
+import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +26,12 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Optional<Warehouse> getWarehouse(Long id) {
-        return warehouseRepository.findById(id);
+    public Warehouse getWarehouseById(Long id) {
+        Optional<Warehouse> warehouse = warehouseRepository.findById(id);
+        if (!warehouse.isPresent()) {
+            throw new ResourceNotFoundException("warehouse", "id", id);
+        }
+        return warehouse.get();
     }
 
     @Override

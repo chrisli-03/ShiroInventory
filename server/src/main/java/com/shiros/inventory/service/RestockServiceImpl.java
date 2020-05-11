@@ -2,6 +2,7 @@ package com.shiros.inventory.service;
 
 import com.shiros.inventory.entity.RestockForm;
 import com.shiros.inventory.entity.RestockFormDetail;
+import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.repository.RestockFormDetailRepository;
 import com.shiros.inventory.repository.RestockFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestockServiceImpl implements RestockService {
@@ -42,6 +44,15 @@ public class RestockServiceImpl implements RestockService {
     @Override
     public List<RestockForm> getRestocks(int page, int size) {
         return restockFormRepository.find(PageRequest.of(page-1, size));
+    }
+
+    @Override
+    public RestockForm getRestockFormById(long id) {
+        Optional<RestockForm> restockForm = restockFormRepository.findById(id);
+        if (!restockForm.isPresent()) {
+            throw new ResourceNotFoundException("restock form", "id", id);
+        }
+        return restockForm.get();
     }
 
 }

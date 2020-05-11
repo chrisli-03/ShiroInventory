@@ -48,6 +48,10 @@ const routes = [
           {
             path: 'new',
             component: RestockNew
+          },
+          {
+            path: ':id',
+            component: RestockNew
           }
         ]
       },

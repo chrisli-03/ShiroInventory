@@ -1,14 +1,12 @@
 package com.shiros.inventory.controller;
 
 import com.shiros.inventory.entity.Supplier;
-import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class SupplierController {
@@ -27,12 +25,8 @@ public class SupplierController {
 
     @Transactional
     @RequestMapping(value = "/supplier/{id}", method = RequestMethod.GET)
-    public Optional<Supplier> getSupplier(@PathVariable("id") Long id) {
-        Optional<Supplier> supplier = supplierService.getSupplier(id);
-        if (!supplier.isPresent()) {
-            throw new ResourceNotFoundException("supplier", "id", id);
-        }
-        return supplier;
+    public Supplier getSupplierById(@PathVariable("id") Long id) {
+        return supplierService.getSupplierById(id);
     }
 
     @Transactional
