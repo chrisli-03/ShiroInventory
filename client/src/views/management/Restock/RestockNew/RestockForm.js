@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom'
 import { Form, Row, Col, Input, InputNumber, Select, Button } from 'antd'
 import { PlusOutlined } from "@ant-design/icons"
@@ -6,7 +6,7 @@ import { request } from '~/lib/api'
 import tableInfo from '~/data/table/tableInfo'
 import { getList } from '~/store/list/actions'
 import Spinner from '~/components/Spinner/Spinner'
-import './RestockNew.scss'
+import './RestockForm.scss'
 import { connect } from 'react-redux'
 import 'antd/es/table/style/css'
 
@@ -15,18 +15,19 @@ const { Option } = Select;
 const supplierKey = tableInfo.supplier.key
 const warehouseKey = tableInfo.warehouse.key
 
-const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse }) => {
+const RestockForm = ({ loading, suppliers, warehouses, getSupplier, getWarehouse }) => {
+  const [ loadingForm, setLoadingForm ] = useState(false)
   const { id } = useParams()
   const history = useHistory()
-  const [form] = Form.useForm()
+  const [ form ] = Form.useForm()
 
   const supplierOptions = suppliers.map((supplier, i) => <Option value={supplier.id} key={i}>{supplier.supplierName}</Option>)
   const warehouseOptions = warehouses.map((warehouse, i) => <Option value={warehouse.id} key={i}>{warehouse.warehouseName}</Option>)
 
   const onFinish = value => {
-    if (!value.detail) value.detail = []
-    value.detail.forEach(n => n.itemPrice = Number(n.itemPrice))
-    request('restock', 'post', { data: value })
+    if (!value.restockFormDetails) value.detail = []
+    value.restockFormDetails.forEach(n => n.itemPrice = Number(n.itemPrice))
+    request('restock', id ? 'put' : 'post', { data: value })
       .then(data => redirectTo('/restock/list'))
   }
 
@@ -42,12 +43,27 @@ const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse 
     getWarehouse()
   }, [getWarehouse])
 
-  if (loading) {
+  useEffect(() => {
+    if (id) {
+      setLoadingForm(true)
+      request(`restock/${id}`, 'get').then(data => {
+        setLoadingForm(false)
+        let restockFormDetails = data.restockFormDetails || []
+        form.setFieldsValue({
+          formID: data.formID,
+          supplier: data.supplier,
+          restockFormDetails
+        })
+      })
+    }
+  }, [id])
+
+  if (loading || loadingForm) {
     return <Spinner />
   }
 
   return <div>
-    <h6>New Restock</h6>
+    <h6>{ id ? 'Edit' : 'New' } Restock Form</h6>
     <Form
       form={form}
       name="new_restock"
@@ -93,7 +109,7 @@ const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse 
           </Form.Item>
         </Col>
       </Row>
-      <Form.List name="detail">
+      <Form.List name="restockFormDetails">
         {(fields, { add, remove }) => (
           <div className="ant-table ant-table-small ant-table-fixed-header">
             <table style={{tableLayout: "fixed", width: '100%'}}>
@@ -184,18 +200,18 @@ const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse 
                         style={{ marginBottom: 0 }}
                         shouldUpdate={
                           (prevValues, currentValues) => {
-                            if (!prevValues.detail[index]) return true
-                            return (prevValues.detail[index].itemQuantity !== currentValues.detail[index].itemQuantity) ||
-                              (prevValues.detail[index].itemPrice !== currentValues.detail[index].itemPrice)
+                            if (!prevValues.restockFormDetails[index]) return true
+                            return (prevValues.restockFormDetails[index].itemQuantity !== currentValues.restockFormDetails[index].itemQuantity) ||
+                              (prevValues.restockFormDetails[index].itemPrice !== currentValues.restockFormDetails[index].itemPrice)
                           }
                         }
                       >
                         {({ getFieldValue }) => {
-                          const itemPrice = getFieldValue(["detail", index, "itemPrice"])
-                          const itemQuantity = getFieldValue(["detail", index, "itemQuantity"])
+                          const itemPrice = getFieldValue(["restockFormDetails", index, "itemPrice"])
+                          const itemQuantity = getFieldValue(["restockFormDetails", index, "itemQuantity"])
                           if (typeof itemPrice === 'undefined' || itemPrice === '') return '-'
                           if (typeof itemQuantity === 'undefined' || itemPrice === '') return '-'
-                          return `￥${(getFieldValue(["detail", index, "itemPrice"]) * getFieldValue(["detail", index, "itemQuantity"])).toFixed(2)}`
+                          return `￥${(getFieldValue(["restockFormDetails", index, "itemPrice"]) * getFieldValue(["restockFormDetails", index, "itemQuantity"])).toFixed(2)}`
                         }}
                       </Form.Item>
                     </td>
@@ -220,7 +236,7 @@ const RestockNew = ({ loading, suppliers, warehouses, getSupplier, getWarehouse 
         )}
       </Form.List>
       <Form.Item>
-        <Button type="primary" htmlType="submit">Create</Button>
+        <Button type="primary" htmlType="submit">{ id ? 'Edit' : 'Create' }</Button>
         <Link to='/restock/list'><Button className="ml-3" type="default">Cancel</Button></Link>
       </Form.Item>
     </Form>
@@ -241,4 +257,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RestockNew)
+)(RestockForm)

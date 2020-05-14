@@ -55,4 +55,9 @@ public class RestockServiceImpl implements RestockService {
         return restockForm.get();
     }
 
+    @Override
+    public List<RestockFormDetail> getRestockFormDetails(long id) {
+        return restockFormDetailRepository.getRestockFormsByFormId(id);
+    }
+
 }

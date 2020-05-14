@@ -2,9 +2,9 @@ import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { useHistory, Link } from 'react-router-dom'
 import { request } from '~/lib/api'
-import './SupplierNew.scss'
+import './SupplierForm.scss'
 
-const SupplierNew = () => {
+const SupplierForm = () => {
   const history = useHistory()
   const onFinish = value => {
     request('supplier', 'post', { data: value })
@@ -70,4 +70,4 @@ const SupplierNew = () => {
   </div>
 }
 
-export default SupplierNew
+export default SupplierForm

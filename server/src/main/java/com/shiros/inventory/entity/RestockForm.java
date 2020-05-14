@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="tb_restock")
@@ -25,6 +26,10 @@ public class RestockForm {
     @Column(name="creation_date")
     private Date creationDate;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restock_form")
+    private List<RestockFormDetail> restockFormDetails;
+
     public RestockForm() {
         this.creationDate = new Date();
     }
@@ -41,6 +46,14 @@ public class RestockForm {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<RestockFormDetail> getRestockFormDetails() {
+        return restockFormDetails;
+    }
+
+    public void setRestockFormDetails(List<RestockFormDetail> restockFormDetails) {
+        this.restockFormDetails = restockFormDetails;
     }
 
     public String getFormID() {

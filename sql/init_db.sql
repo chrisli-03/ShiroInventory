@@ -1,10 +1,5 @@
 CREATE DATABASE IF NOT EXISTS shiros_inventory;
 USE shiros_inventory;
-CREATE TABLE IF NOT EXISTS tb_inventory (
-	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	item_name VARCHAR(255) NOT NULL,
-	item_code VARCHAR(255) NOT NULL
-);
 CREATE TABLE IF NOT EXISTS tb_restock (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	form_id VARCHAR(255) NOT NULL,
@@ -13,10 +8,11 @@ CREATE TABLE IF NOT EXISTS tb_restock (
 );
 CREATE TABLE IF NOT EXISTS tb_restock_detail (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	item_name VARCHAR(255) NOT NULL,
+	item_code VARCHAR(255) NOT NULL,
 	item_spec VARCHAR(255),
 	item_price FLOAT NOT NULL,
 	item_quantity INT NOT NULL,
-	item VARCHAR(255) NOT NULL,
 	restock_form INT NOT NULL,
 	warehouse INT NOT NULL
 );

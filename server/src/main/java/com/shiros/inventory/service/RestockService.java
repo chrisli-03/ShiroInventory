@@ -12,5 +12,6 @@ public interface RestockService {
     public Long getRestockCount();
     public List<RestockForm> getRestocks(int page, int size);
     public RestockForm getRestockFormById(long id);
+    public List<RestockFormDetail> getRestockFormDetails(long id);
 
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { useHistory, Link } from 'react-router-dom'
 import { request } from '~/lib/api'
-import './WarehouseNew.scss'
+import './WarehouseForm.scss'
 
-const WarehouseNew = () => {
+const WarehouseForm = () => {
   const history = useHistory()
   const onFinish = value => {
     request('warehouse', 'post', { data: value })
@@ -54,4 +54,4 @@ const WarehouseNew = () => {
   </div>
 }
 
-export default WarehouseNew
+export default WarehouseForm

@@ -15,14 +15,11 @@ public class RestockFormDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Transient
+    @Column(name="item_name")
     private String itemName;
 
-    @Transient
+    @Column(name="item_code")
     private String itemCode;
-
-    @Column(name="item")
-    private Long item;
 
     @Column(name="warehouse")
     private Long warehouse;
@@ -53,14 +50,6 @@ public class RestockFormDetail {
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
-    }
-
-    public Long getItem() {
-        return item;
-    }
-
-    public void setItem(Long item) {
-        this.item = item;
     }
 
     public Long getWarehouse() {
