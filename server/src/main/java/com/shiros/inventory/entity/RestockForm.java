@@ -1,5 +1,6 @@
 package com.shiros.inventory.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class RestockForm {
     @Column(name="creation_date")
     private Date creationDate;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restock_form")
     private List<RestockFormDetail> restockFormDetails;

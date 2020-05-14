@@ -1,5 +1,6 @@
 package com.shiros.inventory.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -33,8 +34,10 @@ public class RestockFormDetail {
     @Column(name="item_quantity")
     private int itemQuantity;
 
-    @Column(name="restock_form")
-    private Long restockForm;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="restock_form")
+    private RestockForm restockForm;
 
     public String getItemName() {
         return itemName;
@@ -84,11 +87,11 @@ public class RestockFormDetail {
         this.itemQuantity = itemQuantity;
     }
 
-    public Long getRestockForm() {
+    public RestockForm getRestockForm() {
         return restockForm;
     }
 
-    public void setRestockForm(Long restockForm) {
+    public void setRestockForm(RestockForm restockForm) {
         this.restockForm = restockForm;
     }
 }
