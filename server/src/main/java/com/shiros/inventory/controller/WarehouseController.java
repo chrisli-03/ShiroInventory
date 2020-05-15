@@ -21,12 +21,6 @@ public class WarehouseController {
     }
 
     @Transactional
-    @RequestMapping(value = "/warehouse", method = RequestMethod.POST)
-    public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
-        return warehouseService.createWarehouse(warehouse);
-    }
-
-    @Transactional
     @RequestMapping(value = "/warehouse/{id}", method = RequestMethod.GET)
     public Warehouse getWarehouseById(@PathVariable("id") Long id) {
         return warehouseService.getWarehouseById(id);
@@ -45,6 +39,19 @@ public class WarehouseController {
     @RequestMapping(value = "/warehouse_count", method = RequestMethod.GET)
     public Long getWarehouseCount() {
         return warehouseService.getWarehouseCount();
+    }
+
+    @Transactional
+    @RequestMapping(value = "/warehouse", method = RequestMethod.POST)
+    public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
+        return warehouseService.createWarehouse(warehouse);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/warehouse/{id}", method = RequestMethod.PUT)
+    public Warehouse updateWarehouse(@PathVariable("id") Long id, @RequestBody Warehouse warehouse) {
+        warehouse.setId(id);
+        return warehouseService.updateWarehouse(warehouse);
     }
 
 }

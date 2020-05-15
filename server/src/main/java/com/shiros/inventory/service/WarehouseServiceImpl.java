@@ -26,6 +26,11 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
+    public Warehouse updateWarehouse(Warehouse warehouse) {
+        return warehouseRepository.save(warehouse);
+    }
+
+    @Override
     public Warehouse getWarehouseById(Long id) {
         Optional<Warehouse> warehouse = warehouseRepository.findById(id);
         if (!warehouse.isPresent()) {

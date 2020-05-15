@@ -4,12 +4,12 @@ const Dashboard = React.lazy(() => import(/* webpackChunkName: "views/main/Dashb
 const TableWrapper = React.lazy(() => import(/* webpackChunkName: "components/wrappers/TableWrapper" */ '~/components/wrappers/TableWrapper/TableWrapper'))
 const InventoryList = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory/InventoryList" */ '~/views/management/Inventory/InventoryList/InventoryList'))
 const RestockList = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockList" */ '~/views/management/Restock/RestockList/RestockList'))
-const RestockNew = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockNew" */ '~/views/management/Restock/RestockNew/RestockNew'))
+const RestockForm = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockForm" */ '~/views/management/Restock/RestockForm/RestockForm'))
 const ConsumptionList = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption/ConsumptionList" */ '~/views/management/Consumption/ConsumptionList/ConsumptionList'))
 const WarehouseList = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseList" */ '~/views/management/Warehouse/WarehouseList/WarehouseList'))
-const WarehouseNew = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseNew" */ '~/views/management/Warehouse/WarehouseNew/WarehouseNew'))
+const WarehouseForm = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseForm" */ '~/views/management/Warehouse/WarehouseForm/WarehouseForm'))
 const SupplierList = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierList" */ '~/views/management/Supplier/SupplierList/SupplierList'))
-const SupplierNew = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierNew" */ '~/views/management/Supplier/SupplierNew/SupplierNew'))
+const SupplierForm = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierForm" */ '~/views/management/Supplier/SupplierForm/SupplierForm'))
 
 const routes = [
   {
@@ -47,11 +47,11 @@ const routes = [
           },
           {
             path: 'new',
-            component: RestockNew
+            component: RestockForm
           },
           {
             path: ':id',
-            component: RestockNew
+            component: RestockForm
           }
         ]
       },
@@ -77,7 +77,11 @@ const routes = [
           },
           {
             path: 'new',
-            component: WarehouseNew
+            component: WarehouseForm
+          },
+          {
+            path: ':id',
+            component: WarehouseForm
           }
         ]
       },
@@ -92,7 +96,11 @@ const routes = [
           },
           {
             path: 'new',
-            component: SupplierNew
+            component: SupplierForm
+          },
+          {
+            path: ':id',
+            component: SupplierForm
           }
         ]
       }

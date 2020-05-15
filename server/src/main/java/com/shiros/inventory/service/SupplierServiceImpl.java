@@ -25,6 +25,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public Supplier updateSupplier(Supplier supplier) {
+        return supplierRepository.save(supplier);
+    }
+
+    @Override
     public Supplier getSupplierById(Long id) {
         Optional<Supplier> supplier = supplierRepository.findById(id);
         if (!supplier.isPresent()) {

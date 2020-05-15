@@ -18,12 +18,6 @@ public class SupplierController {
     }
 
     @Transactional
-    @RequestMapping(value = "/supplier", method = RequestMethod.POST)
-    public Supplier createSupplier(@RequestBody Supplier supplier) {
-        return supplierService.createSupplier(supplier);
-    }
-
-    @Transactional
     @RequestMapping(value = "/supplier/{id}", method = RequestMethod.GET)
     public Supplier getSupplierById(@PathVariable("id") Long id) {
         return supplierService.getSupplierById(id);
@@ -42,6 +36,19 @@ public class SupplierController {
     @RequestMapping(value = "/supplier_count", method = RequestMethod.GET)
     public Long getSupplierCount() {
         return supplierService.getSupplierCount();
+    }
+
+    @Transactional
+    @RequestMapping(value = "/supplier", method = RequestMethod.POST)
+    public Supplier createSupplier(@RequestBody Supplier supplier) {
+        return supplierService.createSupplier(supplier);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/supplier/{id}", method = RequestMethod.PUT)
+    public Supplier updateSupplier(@PathVariable("id") Long id, @RequestBody Supplier supplier) {
+        supplier.setId(id);
+        return supplierService.updateSupplier(supplier);
     }
 
 }
