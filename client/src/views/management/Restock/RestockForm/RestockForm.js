@@ -27,7 +27,7 @@ const RestockForm = ({ loading, suppliers, warehouses, getSupplier, getWarehouse
   const onFinish = value => {
     if (!value.restockFormDetails) value.detail = []
     value.restockFormDetails.forEach(n => n.itemPrice = Number(n.itemPrice))
-    request('restock', id ? 'put' : 'post', { data: value })
+    request(`restock${id ? `/${id}` : ''}`, id ? 'put' : 'post', { data: value })
       .then(data => redirectTo('/restock/list'))
   }
 

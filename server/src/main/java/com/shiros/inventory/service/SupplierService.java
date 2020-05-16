@@ -3,7 +3,6 @@ package com.shiros.inventory.service;
 import com.shiros.inventory.entity.Supplier;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SupplierService {
 

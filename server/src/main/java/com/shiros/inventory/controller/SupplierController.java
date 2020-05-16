@@ -11,7 +11,8 @@ import java.util.List;
 @RestController
 public class SupplierController {
 
-    SupplierService supplierService;
+    private SupplierService supplierService;
+
     @Autowired
     public void setInjectionBean(SupplierService supplierService) {
         this.supplierService = supplierService;

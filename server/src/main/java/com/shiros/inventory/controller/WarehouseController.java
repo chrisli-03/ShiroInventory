@@ -1,14 +1,12 @@
 package com.shiros.inventory.controller;
 
 import com.shiros.inventory.entity.Warehouse;
-import com.shiros.inventory.exception.ResourceNotFoundException;
 import com.shiros.inventory.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class WarehouseController {

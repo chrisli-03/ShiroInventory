@@ -19,12 +19,6 @@ public class RestockController {
     }
 
     @Transactional
-    @RequestMapping(value = "/restock", method = RequestMethod.POST)
-    public RestockForm createRestock(@RequestBody RestockForm restockForm) {
-        return restockService.createRestockForm(restockForm);
-    }
-
-    @Transactional
     @RequestMapping(value = "/restock", method = RequestMethod.GET)
     public List<RestockForm> getRestocks(@RequestParam int page, @RequestParam int size) {
         return restockService.getRestocks(page, size);
@@ -40,6 +34,19 @@ public class RestockController {
     @RequestMapping(value = "/restock/{id}", method = RequestMethod.GET)
     public RestockForm getRestockFormById(@PathVariable("id") long id) {
         return restockService.getRestockFormById(id);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/restock", method = RequestMethod.POST)
+    public RestockForm createRestock(@RequestBody RestockForm restockForm) {
+        return restockService.createRestockForm(restockForm);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/restock/{id}", method = RequestMethod.PUT)
+    public RestockForm updateRestock(@PathVariable("id") long id, @RequestBody RestockForm restockForm) {
+        restockForm.setId(id);
+        return restockService.updateRestockForm(restockForm);
     }
 
 }
