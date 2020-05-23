@@ -6,6 +6,7 @@ const InventoryList = React.lazy(() => import(/* webpackChunkName: "views/manage
 const RestockList = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockList" */ '~/views/management/Restock/RestockList/RestockList'))
 const RestockForm = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockForm" */ '~/views/management/Restock/RestockForm/RestockForm'))
 const ConsumptionList = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption/ConsumptionList" */ '~/views/management/Consumption/ConsumptionList/ConsumptionList'))
+const ConsumptionForm = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption/ConsumptionForm" */ '~/views/management/Consumption/ConsumptionForm/ConsumptionForm'))
 const WarehouseList = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseList" */ '~/views/management/Warehouse/WarehouseList/WarehouseList'))
 const WarehouseForm = React.lazy(() => import(/* webpackChunkName: "views/management/Warehouse/WarehouseForm" */ '~/views/management/Warehouse/WarehouseForm/WarehouseForm'))
 const SupplierList = React.lazy(() => import(/* webpackChunkName: "views/management/Supplier/SupplierList" */ '~/views/management/Supplier/SupplierList/SupplierList'))
@@ -63,6 +64,14 @@ const routes = [
           {
             path: 'list',
             component: ConsumptionList
+          },
+          {
+            path: 'new',
+            component: ConsumptionForm
+          },
+          {
+            path: ':id',
+            component: ConsumptionForm
           }
         ]
       },

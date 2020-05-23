@@ -18,13 +18,11 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
-    @Transactional
     @RequestMapping(value = "/supplier/{id}", method = RequestMethod.GET)
     public Supplier getSupplierById(@PathVariable("id") Long id) {
         return supplierService.getSupplierById(id);
     }
 
-    @Transactional
     @RequestMapping(value = "/supplier", method = RequestMethod.GET)
     public List<Supplier> getSuppliers(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         if (page == null || size == null) {
@@ -33,7 +31,6 @@ public class SupplierController {
         return supplierService.getSuppliers(page, size);
     }
 
-    @Transactional
     @RequestMapping(value = "/supplier_count", method = RequestMethod.GET)
     public Long getSupplierCount() {
         return supplierService.getSupplierCount();

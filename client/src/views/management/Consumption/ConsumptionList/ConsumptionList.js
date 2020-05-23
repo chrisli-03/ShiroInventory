@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 import { getListSize, getList } from '~/store/list/actions'
 import tableInfo from '~/data/table/tableInfo'
@@ -30,7 +31,7 @@ const ConsumptionList = ({ loading, size, dataSource, getConsumptionSize, getCon
       columns={columns}
       buttons={
         <React.Fragment>
-          <Button type="primary">New Consumption</Button>
+          <Link to='/consumption/new'><Button type="primary">New Consumption</Button></Link>
         </React.Fragment>
       }
       onChange={onChange}

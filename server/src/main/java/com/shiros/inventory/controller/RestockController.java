@@ -18,19 +18,16 @@ public class RestockController {
         this.restockService = restockService;
     }
 
-    @Transactional
     @RequestMapping(value = "/restock", method = RequestMethod.GET)
     public List<RestockForm> getRestocks(@RequestParam int page, @RequestParam int size) {
         return restockService.getRestocks(page, size);
     }
 
-    @Transactional
     @RequestMapping(value = "/restock_count", method = RequestMethod.GET)
     public Long getRestockCount() {
         return restockService.getRestockCount();
     }
 
-    @Transactional
     @RequestMapping(value = "/restock/{id}", method = RequestMethod.GET)
     public RestockForm getRestockFormById(@PathVariable("id") long id) {
         return restockService.getRestockFormById(id);

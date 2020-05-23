@@ -18,13 +18,11 @@ public class WarehouseController {
         this.warehouseService = warehouseService;
     }
 
-    @Transactional
     @RequestMapping(value = "/warehouse/{id}", method = RequestMethod.GET)
     public Warehouse getWarehouseById(@PathVariable("id") Long id) {
         return warehouseService.getWarehouseById(id);
     }
 
-    @Transactional
     @RequestMapping(value = "/warehouse", method = RequestMethod.GET)
     public List<Warehouse> getWarehouses(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         if (page == null || size == null) {
@@ -33,7 +31,6 @@ public class WarehouseController {
         return warehouseService.getWarehouses(page, size);
     }
 
-    @Transactional
     @RequestMapping(value = "/warehouse_count", method = RequestMethod.GET)
     public Long getWarehouseCount() {
         return warehouseService.getWarehouseCount();
