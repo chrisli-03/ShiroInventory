@@ -20,12 +20,12 @@ public class RestockController {
 
     @RequestMapping(value = "/restock", method = RequestMethod.GET)
     public List<RestockForm> getRestocks(@RequestParam int page, @RequestParam int size) {
-        return restockService.getRestocks(page, size);
+        return restockService.getRestockForms(page, size);
     }
 
     @RequestMapping(value = "/restock_count", method = RequestMethod.GET)
     public Long getRestockCount() {
-        return restockService.getRestockCount();
+        return restockService.getRestockFormCount();
     }
 
     @RequestMapping(value = "/restock/{id}", method = RequestMethod.GET)

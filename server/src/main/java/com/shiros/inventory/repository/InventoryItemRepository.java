@@ -14,7 +14,7 @@ public interface InventoryItemRepository extends CrudRepository<RestockFormDetai
     @Query(
             "SELECT d.itemName AS itemName, d.itemCode AS itemCode, d.itemSpec AS itemSpec, SUM(d.itemQuantity) AS itemQuantity " +
             "FROM RestockFormDetail d " +
-            "GROUP BY d.itemCode, d.itemSpec"
+            "GROUP BY d.itemCode"
     )
     List<InventoryItem> getInventoryItems();
 

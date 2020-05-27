@@ -32,12 +32,12 @@ public class RestockServiceImpl implements RestockService {
     }
 
     @Override
-    public Long getRestockCount() {
+    public Long getRestockFormCount() {
         return restockFormRepository.count();
     }
 
     @Override
-    public List<RestockForm> getRestocks(int page, int size) {
+    public List<RestockForm> getRestockForms(int page, int size) {
         return restockFormRepository.find(PageRequest.of(page-1, size));
     }
 

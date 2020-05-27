@@ -23,7 +23,7 @@ const ConsumptionForm = () => {
   useEffect(() => {
     if (id) {
       setLoadingForm(true)
-      request(`supplier/${id}`, 'get').then(data => {
+      request(`consumption/${id}`, 'get').then(data => {
         setLoadingForm(false)
         form.setFieldsValue(data)
       })
@@ -60,7 +60,7 @@ const ConsumptionForm = () => {
       </Row>
       <Form.Item>
         <Button type="primary" htmlType="submit">{ id ? 'Edit' : 'Create' }</Button>
-        <Link to='/supplier/list'><Button className="ml-3" type="default">Cancel</Button></Link>
+        <Link to='/consumption/list'><Button className="ml-3" type="default">Cancel</Button></Link>
       </Form.Item>
     </Form>
   </div>

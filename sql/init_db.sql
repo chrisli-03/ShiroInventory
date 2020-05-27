@@ -16,6 +16,17 @@ CREATE TABLE IF NOT EXISTS tb_restock_detail (
 	restock_form INT NOT NULL,
 	warehouse INT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS tb_consumption (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    form_id VARCHAR(255) NOT NULL,
+    creation_date DATETIME NOT NULL
+);
+CREATE TABLE IF NOT EXISTS tb_consumption_detail (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    item_code VARCHAR(255) NOT NULL,
+    consumption_amount INT NOT NULL,
+    consumption_form INT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS tb_warehouse (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	warehouse_name VARCHAR(255) NOT NULL,
