@@ -17,10 +17,10 @@ public class ConsumptionFormDetail {
     private Long id;
 
     @Column(name="item_code")
-    private String itemName;
+    private String itemCode;
 
     @Column(name="consumption_amount")
-    private Long warehouse;
+    private Long consumptionAmount;
 
     @JsonBackReference
     @ManyToOne
@@ -35,20 +35,20 @@ public class ConsumptionFormDetail {
         this.id = id;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getItemCode() {
+        return itemCode;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
     }
 
-    public Long getWarehouse() {
-        return warehouse;
+    public Long getConsumptionAmount() {
+        return consumptionAmount;
     }
 
-    public void setWarehouse(Long warehouse) {
-        this.warehouse = warehouse;
+    public void setConsumptionAmount(Long consumptionAmount) {
+        this.consumptionAmount = consumptionAmount;
     }
 
     public ConsumptionForm getConsumptionForm() {

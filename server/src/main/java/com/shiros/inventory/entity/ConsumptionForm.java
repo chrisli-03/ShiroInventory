@@ -29,6 +29,10 @@ public class ConsumptionForm {
     @JoinColumn(name = "consumption_form")
     private List<ConsumptionFormDetail> consumptionFormDetails;
 
+    public ConsumptionForm() {
+        this.creationDate = new Date();
+    }
+
     public Long getId() {
         return id;
     }

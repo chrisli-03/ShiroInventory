@@ -36,12 +36,6 @@ public class RestockForm {
         this.creationDate = new Date();
     }
 
-    public RestockForm(String formID, String supplier) {
-        this.formID = formID;
-        this.supplier = supplier;
-        this.creationDate = new Date();
-    }
-
     public Long getId() {
         return id;
     }
