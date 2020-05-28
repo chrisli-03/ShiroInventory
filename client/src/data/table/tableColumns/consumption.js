@@ -1,37 +1,16 @@
+import { Link } from 'react-router-dom'
+import React from 'react'
+
 export default [
   {
-    title: 'Item Name',
-    dataIndex: 'item_name',
-    key: 'item_name',
+    title: 'Form ID',
+    dataIndex: 'formID',
+    key: 'formID',
+    render: (formID, { id }) => { return <Link to={`/consumption/${id}`}>{formID}</Link> }
   },
   {
-    title: 'Item Code',
-    dataIndex: 'item_code',
-    key: 'item_code'
-  },
-  {
-    title: 'Used',
-    dataIndex: 'used',
-    key: 'used',
-  },
-  {
-    title: 'Unit Price',
-    dataIndex: 'unit_price',
-    key: 'unit_price'
-  },
-  {
-    title: 'Cost',
-    dataIndex: 'cost',
-    key: 'cost'
-  },
-  {
-    title: 'Specification',
-    dataIndex: 'specification',
-    key: 'specification',
-  },
-  {
-    title: 'Warehouse',
-    dataIndex: 'warehouse',
-    key: 'warehouse'
+    title: 'Creation Date',
+    dataIndex: 'creationDate',
+    key: 'creationDate'
   }
 ]

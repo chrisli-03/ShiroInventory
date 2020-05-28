@@ -20,7 +20,7 @@ const ConsumptionList = ({ loading, size, dataSource, getConsumptionSize, getCon
   }, [getConsumptionSize])
 
   useEffect(() => {
-    if (size > 1) getConsumption(1, 10)
+    if (size > 0) getConsumption(1, 10)
   }, [size, getConsumption])
 
   return (

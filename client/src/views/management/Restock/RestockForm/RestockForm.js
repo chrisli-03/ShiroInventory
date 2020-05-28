@@ -25,7 +25,7 @@ const RestockForm = ({ loading, suppliers, warehouses, getSupplier, getWarehouse
   const warehouseOptions = warehouses.map((warehouse, i) => <Option value={warehouse.id} key={i}>{warehouse.warehouseName}</Option>)
 
   const onFinish = value => {
-    if (!value.restockFormDetails) value.detail = []
+    if (!value.restockFormDetails) value.restockFormDetails = []
     value.restockFormDetails.forEach(n => n.itemPrice = Number(n.itemPrice))
     request(`restock${id ? `/${id}` : ''}`, id ? 'put' : 'post', { data: value })
       .then(data => redirectTo('/restock/list'))
