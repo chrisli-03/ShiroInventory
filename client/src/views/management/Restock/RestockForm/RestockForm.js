@@ -10,7 +10,7 @@ import './RestockForm.scss'
 import { connect } from 'react-redux'
 import 'antd/es/table/style/css'
 
-const { Option } = Select;
+const { Option } = Select
 
 const supplierKey = tableInfo.supplier.key
 const warehouseKey = tableInfo.warehouse.key

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Row, Col, Input, Button, Select, InputNumber } from 'antd'
+import { Form, Row, Col, Input, Button, Select } from 'antd'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { request } from '~/lib/api'
 import Spinner from '~/components/Spinner/Spinner'
@@ -7,8 +7,14 @@ import './ConsumptionForm.scss'
 import { PlusOutlined } from '@ant-design/icons'
 import 'antd/es/table/style/css'
 
+const { Option } = Select
+
 const ConsumptionForm = () => {
   const [ loadingForm, setLoadingForm ] = useState(false)
+  const [ loadingInventory, setLoadingInventory ] = useState(false)
+  const [ inventory, setInventory ] = useState([])
+  const [ itemUsed, setItemUsed ] = useState(new Set())
+  const [ inventoryMap, setInventoryMap ] = useState(new Map())
   const { id } = useParams()
   const history = useHistory()
   const [ form ] = Form.useForm()
@@ -24,17 +30,32 @@ const ConsumptionForm = () => {
     history.push(path)
   }
 
+  const updateItem = () => {
+    setItemUsed(form.getFieldValue(["consumptionFormDetails"]).reduce((acc, item) => item ? acc.add(item.itemCode) : acc, new Set()))
+  }
+
   useEffect(() => {
     if (id) {
       setLoadingForm(true)
       request(`consumption/${id}`, 'get').then(data => {
-        setLoadingForm(false)
         form.setFieldsValue(data)
-      })
+        updateItem()
+      }).finally(() => { setLoadingForm(false) })
     }
   }, [id])
 
-  if (loadingForm) {
+  useEffect(() => {
+    setLoadingInventory(true)
+    request('inventory', 'get').then(data => {
+      setInventory(data)
+    }).finally(() => { setLoadingInventory(false) })
+  }, [])
+
+  useEffect(() => {
+    setInventoryMap(inventory.reduce((acc, item) => acc.set(item.itemCode, item), new Map()))
+  }, [inventory])
+
+  if (loadingForm || loadingInventory) {
     return <Spinner />
   }
 
@@ -69,9 +90,10 @@ const ConsumptionForm = () => {
               <colgroup></colgroup>
               <thead className="ant-table-thead">
               <tr>
+                <th className="ant-table-cell">Item</th>
                 <th className="ant-table-cell">Item Name</th>
-                <th className="ant-table-cell">Item Code</th>
                 <th className="ant-table-cell">Specification</th>
+                <th className="ant-table-cell">Available</th>
                 <th className="ant-table-cell">Consumption Amount</th>
                 <th className="ant-table-cell">Action</th>
               </tr>
@@ -80,25 +102,91 @@ const ConsumptionForm = () => {
               {fields.map((field, index) => (
                 <tr data-row-key="1" className="ant-table-row ant-table-row-level-0" key={index}>
                   <td className="ant-table-cell">
-                    <Input placeholder="Item Name" disabled />
-                  </td>
-                  <td className="ant-table-cell">
                     <Form.Item
                       name={[index, "itemCode"]}
                       className="mb-0 no-message"
                       rules={[{ required: true }]}
                     >
-                      <Input placeholder="Item Code" />
+                      <Select
+                        showSearch
+                        placeholder="Item"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        onChange={() => updateItem()}
+                      >
+                        {
+                          inventory.map((item, i) => {
+                            return <Option value={item.itemCode} key={i} disabled={itemUsed.has(item.itemCode)}>{`${item.itemName}/${item.itemCode}/${item.itemSpec}`}</Option>
+                          })
+                        }
+                      </Select>
                     </Form.Item>
                   </td>
                   <td className="ant-table-cell">
-                    <Input placeholder="Specification" disabled />
+                    <Form.Item
+                      style={{ marginBottom: 0 }}
+                      shouldUpdate={
+                        (prevValues, currentValues) => {
+                          if (!prevValues.consumptionFormDetails[index]) return true
+                          return prevValues.consumptionFormDetails[index].itemCode !== currentValues.consumptionFormDetails[index].itemCode
+                        }
+                      }
+                    >
+                      {({ getFieldValue }) => {
+                        const itemCode = getFieldValue(["consumptionFormDetails", index, "itemCode"])
+                        return <Input placeholder="Item Name" disabled value={itemCode ? inventoryMap.get(itemCode).itemName : ''} />
+                      }}
+                    </Form.Item>
+                  </td>
+                  <td className="ant-table-cell">
+                    <Form.Item
+                      style={{ marginBottom: 0 }}
+                      shouldUpdate={
+                        (prevValues, currentValues) => {
+                          if (!prevValues.consumptionFormDetails[index]) return true
+                          return prevValues.consumptionFormDetails[index].itemCode !== currentValues.consumptionFormDetails[index].itemCode
+                        }
+                      }
+                    >
+                      {({ getFieldValue }) => {
+                        const itemCode = getFieldValue(["consumptionFormDetails", index, "itemCode"])
+                        return <Input placeholder="Item Name" disabled value={itemCode ? inventoryMap.get(itemCode).itemSpec : ''} />
+                      }}
+                    </Form.Item>
+                  </td>
+                  <td>
+                    <Form.Item
+                      style={{ marginBottom: 0 }}
+                      shouldUpdate={
+                        (prevValues, currentValues) => {
+                          if (!prevValues.consumptionFormDetails[index]) return true
+                          return prevValues.consumptionFormDetails[index].itemCode !== currentValues.consumptionFormDetails[index].itemCode
+                        }
+                      }
+                    >
+                      {({ getFieldValue }) => {
+                        const itemCode = getFieldValue(["consumptionFormDetails", index, "itemCode"])
+                        return itemCode ? inventoryMap.get(itemCode).itemAvailable : ''
+                      }}
+                    </Form.Item>
                   </td>
                   <td className="ant-table-cell">
                     <Form.Item
                       name={[index, "consumptionAmount"]}
                       className="mb-0 no-message"
-                      rules={[{ required: true }]}
+                      rules={[
+                        { required: true },
+                        ({ getFieldValue }) => ({
+                          validator(rule, value) {
+                            if (value <= inventoryMap.get(form.getFieldValue(["consumptionFormDetails", index, "itemCode"])).itemAvailable) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject('Not enough item available');
+                          },
+                        })
+                      ]}
                     >
                       <Input placeholder="Consumption Amount" />
                     </Form.Item>
@@ -117,6 +205,7 @@ const ConsumptionForm = () => {
               type="dashed"
               onClick={() => add()}
               style={{ width: "100%" }}
+              disabled={(form.getFieldValue(["consumptionFormDetails"]) || []).length === inventory.length}
             >
               <PlusOutlined /> Add Row
             </Button>
