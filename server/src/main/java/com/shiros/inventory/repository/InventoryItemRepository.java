@@ -1,6 +1,8 @@
 package com.shiros.inventory.repository;
 
 import com.shiros.inventory.entity.InventoryItem;
+import com.shiros.inventory.entity.InventoryItemConsumption;
+import com.shiros.inventory.entity.InventoryItemRestock;
 import com.shiros.inventory.entity.RestockFormDetail;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,5 +22,21 @@ public interface InventoryItemRepository extends CrudRepository<RestockFormDetai
             nativeQuery = true
     )
     List<InventoryItem> getInventoryItems();
+
+    @Query( value = "SELECT d.item_code AS itemCode, d.item_price AS itemPrice, d.item_quantity AS itemQuantity, f.creation_date AS creationDate " +
+                    "FROM tb_restock_detail d " +
+                    "LEFT JOIN tb_restock f " +
+                    "ON d.restock_form = f.id",
+            nativeQuery = true
+    )
+    List<InventoryItemRestock> getInventoryItemRestocks();
+
+    @Query( value = "SELECT d.item_code AS itemCode, d.consumption_amount AS consumptionAmount, f.creation_date AS creationDate " +
+            "FROM tb_consumption_detail d " +
+            "LEFT JOIN tb_consumption f " +
+            "ON d.consumption_form = f.id",
+            nativeQuery = true
+    )
+    List<InventoryItemConsumption> getInventoryItemConsumptions();
 
 }

@@ -1,6 +1,6 @@
 package com.shiros.inventory.controller;
 
-import com.shiros.inventory.entity.InventoryItem;
+import com.shiros.inventory.entity.InventoryItemImpl;
 import com.shiros.inventory.service.InventoryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class InventoryItemController {
     }
 
     @RequestMapping(value = "/inventory", method = RequestMethod.GET)
-    public List<InventoryItem> getInventoryItems() {
+    public List<InventoryItemImpl> getInventoryItems() {
         return inventoryItemService.getInventoryItems();
     }
 
