@@ -24,8 +24,6 @@ const columns = [
   },
   {
     title: 'In Stock',
-    dataIndex: 'inStock',
-    key: 'inStock',
     render: (_, { itemQuantity, consumption }) => itemQuantity - consumption
   }
 ]
