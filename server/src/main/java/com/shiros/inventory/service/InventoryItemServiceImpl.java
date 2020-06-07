@@ -32,4 +32,9 @@ public class InventoryItemServiceImpl implements InventoryItemService {
         return inventory;
     }
 
+    @Override
+    public Long getInventoryItemCount() {
+        return inventoryItemRepository.countInventoryItem();
+    }
+
 }

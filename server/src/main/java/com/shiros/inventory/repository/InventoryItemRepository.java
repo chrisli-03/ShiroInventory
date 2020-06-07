@@ -39,4 +39,9 @@ public interface InventoryItemRepository extends CrudRepository<RestockFormDetai
     )
     List<InventoryItemConsumption> getInventoryItemConsumptions();
 
+    @Query( value = "SELECT COUNT(DISTINCT item_code) AS count FROM tb_restock_detail",
+            nativeQuery = true
+    )
+    Long countInventoryItem();
+
 }

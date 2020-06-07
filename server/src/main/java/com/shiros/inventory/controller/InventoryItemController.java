@@ -24,4 +24,10 @@ public class InventoryItemController {
         return inventoryItemService.getInventoryItems();
     }
 
+
+    @RequestMapping(value = "/inventory_count", method = RequestMethod.GET)
+    public Long getInventoryItemCount() {
+        return inventoryItemService.getInventoryItemCount();
+    }
+
 }

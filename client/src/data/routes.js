@@ -3,6 +3,7 @@ import React from 'react'
 const Dashboard = React.lazy(() => import(/* webpackChunkName: "views/main/Dashboard" */ '~/views/main/Dashboard/Dashboard'))
 const TableWrapper = React.lazy(() => import(/* webpackChunkName: "components/wrappers/TableWrapper" */ '~/components/wrappers/TableWrapper/TableWrapper'))
 const InventoryList = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory/InventoryList" */ '~/views/management/Inventory/InventoryList/InventoryList'))
+const InventoryForm = React.lazy(() => import(/* webpackChunkName: "views/management/Inventory/InventoryForm" */ '~/views/management/Inventory/InventoryForm/InventoryForm'))
 const RestockList = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockList" */ '~/views/management/Restock/RestockList/RestockList'))
 const RestockForm = React.lazy(() => import(/* webpackChunkName: "views/management/Restock/RestockForm" */ '~/views/management/Restock/RestockForm/RestockForm'))
 const ConsumptionList = React.lazy(() => import(/* webpackChunkName: "views/management/Consumption/ConsumptionList" */ '~/views/management/Consumption/ConsumptionList/ConsumptionList'))
@@ -34,6 +35,10 @@ const routes = [
           {
             path: 'list',
             component: InventoryList
+          },
+          {
+            path: ':id',
+            component: InventoryForm
           }
         ]
       },

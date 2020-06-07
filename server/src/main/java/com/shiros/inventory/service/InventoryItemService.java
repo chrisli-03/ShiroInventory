@@ -7,5 +7,6 @@ import java.util.List;
 public interface InventoryItemService {
 
     public List<InventoryItemImpl> getInventoryItems();
+    public Long getInventoryItemCount();
 
 }

@@ -1,47 +1,36 @@
+import { Link } from 'react-router-dom'
+import React from 'react'
+
 export default [
   {
     title: 'Item Name',
-    dataIndex: 'item_name',
-    key: 'item_name',
+    dataIndex: 'itemName',
+    key: 'itemName'
   },
   {
     title: 'Item Code',
-    dataIndex: 'item_code',
-    key: 'item_code'
-  },
-  {
-    title: 'Available',
-    dataIndex: 'available',
-    key: 'available',
-  },
-  {
-    title: 'Used',
-    dataIndex: 'used',
-    key: 'used',
-  },
-  {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
-  },
-  {
-    title: 'Unit Price',
-    dataIndex: 'unit_price',
-    key: 'unit_price'
-  },
-  {
-    title: 'Cost',
-    dataIndex: 'cost',
-    key: 'cost'
+    dataIndex: 'itemCode',
+    key: 'itemCode',
+    render: (_, item) => { return <Link to={{ pathname: `/inventory/${item.itemCode}`, state: { item } }}>{item.itemCode}</Link> }
   },
   {
     title: 'Specification',
-    dataIndex: 'specification',
-    key: 'specification',
+    dataIndex: 'itemSpec',
+    key: 'itemSpec',
   },
   {
-    title: 'Warehouse',
-    dataIndex: 'warehouse',
-    key: 'warehouse'
+    title: 'Restock',
+    key: 'restock',
+    render: (_, { inventoryItemRestocks }) => inventoryItemRestocks.reduce((acc, n) => acc + n.itemQuantity, 0)
+  },
+  {
+    title: 'Consumption',
+    key: 'consumption',
+    render: (_, { inventoryItemConsumptions }) => inventoryItemConsumptions.reduce((acc, n) => acc + n.consumptionAmount, 0)
+  },
+  {
+    title: 'Available',
+    dataIndex: 'itemAvailable',
+    key: 'itemAvailable'
   }
 ]
