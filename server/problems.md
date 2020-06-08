@@ -6,3 +6,5 @@ Solution: add database info in resources/application.properties
 Solution: in controller use @RestController instead of @Controller
 4. Infinite loop between entity with @OneToMany and @ManyToOne
 Solution: use @JsonManagedReference on parent and @JsonBackReference on child
+5. Docker server cannot connect to db unless I do a connection test with tools like Navicat WTF!
+Solution: add allowPublicKeyRetrieval=true to db url
