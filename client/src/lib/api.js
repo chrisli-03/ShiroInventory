@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const request = (url, method, params = {}, query = '', success, failed) => {
   return axios({
-    url: `/${url}` + (query === '' ? '' : `?${query}`),
+    url: `/api/${url}` + (query === '' ? '' : `?${query}`),
     method,
     ...params
   })
